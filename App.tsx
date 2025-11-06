@@ -38,22 +38,19 @@ const App: React.FC = () => {
       })
       .catch(error => console.error('Error fetching English history:', error));
     
-    // Fetch language-independent assets
-    fetch('/picture_comics.png')
-      .then(response => response.ok ? response.blob() : null)
-      .then(blob => {
-        if (!blob) return;
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const photo = reader.result as string;
+    // Fetch language-independent assets like the profile photo from a JSON file
+    fetch('/photo.json')
+      .then(response => response.ok ? response.json() : { photo: '' })
+      .then(data => {
+        const photo = data.photo;
+        if (photo) {
           setAllCvData(prevData => ({
             en: { ...prevData.en, personalInfo: { ...prevData.en.personalInfo, profilePhoto: photo } },
             cs: { ...prevData.cs, personalInfo: { ...prevData.cs.personalInfo, profilePhoto: photo } },
           }));
-        };
-        reader.readAsDataURL(blob);
+        }
       })
-      .catch(error => console.error('Error fetching profile picture:', error));
+      .catch(error => console.error('Error fetching profile photo JSON:', error));
   }, []);
 
   const handleCvDataChange = useCallback(<K extends keyof CVData>(
