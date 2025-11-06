@@ -1,0 +1,88 @@
+[
+  {
+    "name": "Languages",
+    "children": [
+      { "name": "JavaScript" },
+      { "name": "TypeScript" },
+      { "name": "PHP" },
+      { "name": "xHTML" },
+      { "name": "CSS3" },
+      { "name": "BrightScript" }
+    ]
+  },
+  {
+    "name": "Agile",
+    "children": [
+      { "name": "Jira" },
+      { "name": "Bugzilla" }
+    ]
+  },
+  {
+    "name": "EcmaScript",
+    "children": [
+      { "name": "React" },
+      { "name": "Redux" },
+      { "name": "AngularJS:1.7" },
+      { "name": "jQuery" },
+      { "name": "YUI" },
+      { "name": "Node.js" },
+      { "name": "Express" },
+      { "name": "Electron" },
+      { "name": "Storybook" }
+    ]
+  },
+  {
+    "name": "SPA&PWA",
+    "children": [
+      { "name": "REST API" },
+      { "name": "Websockets" },
+      { "name": "PostMessages" },
+      { "name": "WebRTC" },
+      { "name": "WebWorkers" },
+      { "name": "Manifest" },
+      { "name": "LocalStorage" },
+      { "name": "CSS3" }
+    ]
+  },
+  {
+    "name": "Databases",
+    "children": [
+      { "name": "MongoDB" },
+      { "name": "MySQL" }
+    ]
+  },
+  {
+    "name": "CI&CD",
+    "children": [
+      { "name": "Webpack" },
+      { "name": "Gulp" },
+      { "name": "Grunt" },
+      { "name": "Apache" },
+      { "name": "Nginx" },
+      { "name": "Varnish" },
+      { "name": "GitHubActions" },
+      { "name": "Pipelines" }
+    ]
+  },
+  {
+    "name": "Tools",
+    "children": [
+      { "name": "MS Windows" },
+      {
+        "name": "Linux",
+        "children": [
+          { "name": "Ubuntu" },
+          { "name": "Raspian" },
+          { "name": "Debian" }
+        ]
+      },
+      { "name": "VituralBox" },
+      { "name": "VSCode" },
+      { "name": "WebStorm" },
+      { "name": "MSOffice" },
+      { "name": "Click" },
+      { "name": "DoubleClick" },
+      { "name": "RightClick" }
+    ]
+  }
+]

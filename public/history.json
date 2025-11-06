@@ -1,0 +1,84 @@
+
+{
+  "experiences": [
+    {
+      "role": "Professional Development",
+      "company": "Self-employed",
+      "period": "8/2025 - Now",
+      "description": "Continuously enhancing skills and exploring new technologies to stay at the forefront of web development.",
+      "projects": [
+        { "name": "Vibe Coding", "description": "Utilizing advanced AI tools for rapid prototyping and accelerated project development." },
+        { "name": "Working with new techs", "description": "Building modern, full-stack applications using cutting-edge frameworks like Next.js, Nest.js, and Vite." }
+      ]
+    },
+    {
+      "role": "Frontend Web Developer",
+      "company": "Suitest®",
+      "period": "12/2024 - 07/2025",
+      "description": "Responsible for the maintenance and feature development of the core Suitest frontend application, ensuring high performance and a seamless user experience.",
+      "projects": [
+        { "name": "UI Overhaul", "description": "Helped manage the application's technical stack, including React, Redux, AngularJS, Storybook, and TypeScript, and assisted with the migration from Webpack 4 to 5. Enhanced code quality by increasing unit test coverage using Jest and Mocha and conducted rigorous code reviews within a 5-person agile team." },
+        { "name": "Features planning", "description": "Played a key role in feature planning, defining technical specifications and implementation strategies for new functionalities." }
+      ]
+    },
+    {
+      "role": "Platform integration Specialist",
+      "company": "Suitest®",
+      "period": "2014 - 2024",
+      "description": "Pioneered the integration of diverse platforms into a unified cross-platform testing solution. Key contributor for OTT platforms including Roku, HbbTV, SmartTVs (Samsung, LG), Freeview Play, ATSC 3.0, Xbox, and PlayStation. In a small, dynamic team of three, we architected the entire application stack, encompassing frontend, backend, core libraries, and IoT device integrations (e.g., Arduino). Independently designed and developed library architectures, including a GUI for synchronized operations. Ensured high application quality through rigorous testing, code reviews, and the creation of a comprehensive suite of automated functional and unit tests for smoke testing and stability control.",
+      "projects": [
+        { "name": "Roku (BrightScript)", "description": "Developed and maintained a core Component Library for Roku, adapting the Suitest instrumentation library for the platform. This involved a complete rewrite in BrightScript for the ARM architecture, focusing on high-performance optimization and providing dedicated customer support." },
+        { "name": "OTT HTML-based applications", "description": "Engineered and implemented a JavaScript library for End-to-End testing across various HTML-based OTT platforms. Utilized advanced browser technologies like WebSockets and PostMessages, and innovated an HTTP Storage technique for persistent data storage on devices lacking standard APIs (FileSystem, LocalStorage, Cookies, etc.)." },
+        { "name": "SwissTxt HbbTv", "description": "Continued development of the SwissTxt application for the HbbTV platform. The application underwent a significant refactoring and architectural overhaul to adopt modern libraries like React and Redux, enabling the delivery of interactive broadcast experiences." }
+      ]
+    },
+    {
+      "role": "Javascript Developer",
+      "company": "mineus)(, s.r.o.",
+      "period": "2012 - 2014",
+      "description": "Developed modern applications leveraging HTML5 APIs, JavaScript, and CSS3 for major clients including PCWorld, IDG, Maxdome, ProSiebenSat.1, SwissTxt, and Tagesspiegel. During my tenure, key HbbTV applications underwent several major refactorings, involving the adoption of newer libraries and a transformation of the overall application architecture.",
+      "projects": [
+        { "name": "Touch-based device application", "description": "Built a responsive, cross-platform HTML WebView application optimized for touch-based devices, including Android and iOS tablets and phones." },
+        { "name": "HbbTv Application", "description": "Created HbbTV applications for leading broadcasters (ProSieben, Kabel1, Sat.1, SwissTxt) featuring EPG, news feeds, and Video-on-Demand galleries for both broadcast and broadband delivery." },
+        { "name": "Maxdome", "description": "Contributed to the development of the Maxdome mobile Video-on-Demand (VoD) application for smartphones and tablets." },
+        { "name": "Pong Game", "description": "Developed a real-time multiplayer Pong game using Socket.io, designed for Smart TV platforms and controlled via standard TV remotes." }
+      ]
+    },
+    {
+      "role": "Web Developer",
+      "company": "Aaron Group, s.r.o.",
+      "period": "2011 - 2012",
+      "description": "Proactively identified and resolved a major bottleneck in the development workflow. Refactored a legacy XML/XSLT build process, reducing compilation time from 5 minutes to just 10 seconds per change, significantly boosting team productivity.",
+      "projects": [
+        { "name": "CMS overhaul", "description": "Responsible for the maintenance and enhancement of web applications and a proprietary internal CMS for enterprise clients like Caterpillar and Czech Airlines." },
+        { "name": "YUI and RightNow CMS", "description": "Developed and maintained the customer care portal for Vodafone Czech Republic (pece.vodafone.cz), utilizing the Yahoo! User Interface (YUI) Library and Oracle RightNow CX Cloud Service." },
+        { "name": "Booking system", "description": "Spearheaded the overhaul of the main flight booking engine, a critical product used by major travel agencies and airlines including czechairlines.cz, letuska.cz, and cedok.cz." }
+      ]
+    },
+    {
+      "role": "Web Developer",
+      "company": "Internet Info",
+      "period": "2007 - 2011",
+      "description": "Created and maintained web magazines such as root.cz, lupa.cz, vitalia.cz, podnikatel.cz, and mesec.cz.",
+      "projects": [
+        { "name": "Magazine Overhaul", "description": "Maintained and updated a portfolio of high-traffic online magazines using PHP 5, focusing on performance improvements through both PHP code optimization and MySQL query tuning." },
+        { "name": "MySQL Expertise", "description": "Completed an advanced MySQL course led by renowned Czech database expert Jakub Vrána." },
+        { "name": "Upgrade and Refactor", "description": "Led a complete architectural refactor of the magazine platform, migrating to an Object-Oriented Programming (OOP) model using PHP 5 and the Nette Framework." }
+      ]
+    }
+  ],
+  "educations": [
+    {
+      "degree": "IT Administrator",
+      "institution": "High School of Information Technologies",
+      "period": "09/2003 - 06/2007",
+      "description": "High school with graduation.",
+      "projects": [
+        { "name": "Hardware and Network Architecture", "description": "Completed the first semester of the Cisco Networking Academy, gaining hands-on experience in network architecture, Telnet administration, and Debian Linux." },
+        { "name": "Programming", "description": "Acquired foundational programming skills in Turbo Pascal, Delphi, and PHP." },
+        { "name": "Designs", "description": "Developed proficiency in graphic design software, including Adobe Photoshop for raster graphics and CorelDraw for vector illustration." },
+        { "name": "MSOffice", "description": "Obtained a certificate of proficiency for the Microsoft Office suite, covering advanced use of Access, Excel, Word, and PowerPoint." }
+      ]
+    }
+  ]
+}
