@@ -16,6 +16,38 @@
             fontFamily: {
               sans: ['Roboto', 'sans-serif'],
             },
+            animation: {
+              'fade-in': 'fade-in 0.4s ease-out forwards',
+              'fly-in-closer': 'fly-in-closer 0.4s ease-out forwards',
+              'modal-overlay-in': 'fade-in 0.5s ease-out both',
+              'modal-overlay-out': 'fade-out 0.3s ease-in 0.9s forwards',
+              'modal-close-in': 'drop-in 0.3s ease-out 0.7s forwards',
+              'modal-window-in': 'drop-in 0.3s ease-out 1.2s forwards',
+              'modal-close-out': 'drop-out 0.5s ease-out forwards',
+              'modal-window-out': 'drop-out 0.4s ease-out 0.2s forwards',
+            },
+            keyframes: {
+              'fade-in': {
+                'from': { opacity: '0' },
+                'to': { opacity: '1' },
+              },
+              'fade-out': {
+                'from': { opacity: '1' },
+                'to': { opacity: '0' },
+              },
+              'fly-in-closer': {
+                '0%': { opacity: '0', transform: 'translateZ(0px) scale(0.9)' },
+                '100%': { opacity: '1', transform: 'translateZ(40px) scale(1)' },
+              },
+              'drop-in': {
+                'from': { opacity: '0', transform: 'translateY(-100px)' },
+                'to': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'drop-out': {
+                'from': { opacity: '1', transform: 'translateY(0)' },
+                'to': { opacity: '0', transform: 'translateY(100px)' },
+              },
+            }
           }
         }
       }

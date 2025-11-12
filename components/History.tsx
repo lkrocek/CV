@@ -73,7 +73,7 @@ export const TimelineNode: React.FC<{
                 
                 {variant === 'full' && (
                   <div className="mt-2 pl-4">
-                    <Editable className="text-gray-700 whitespace-pre-wrap text-xs" onUpdate={v => onChange(section, item.originalIndex, 'description', v)}>{item.description}</Editable>
+                    <Editable className="text-gray-700 whitespace-pre-wrap text-xs text-justify" onUpdate={v => onChange(section, item.originalIndex, 'description', v)}>{item.description}</Editable>
                     
                     {item.projects && item.projects.length > 0 && (
                       <div className="mt-4 space-y-4">
@@ -84,7 +84,7 @@ export const TimelineNode: React.FC<{
                             {/* Fix: Use `section` variable which is correctly typed for onProjectChange */}
                              <Editable as="h5" className="font-semibold text-gray-700 text-xs" onUpdate={v => onProjectChange(section, item.originalIndex, index, 'name', v)}>{project.name}</Editable>
                             {/* Fix: Use `section` variable which is correctly typed for onProjectChange */}
-                             <Editable className="text-gray-600 mt-1 whitespace-pre-wrap text-xs" onUpdate={v => onProjectChange(section, item.originalIndex, index, 'description', v)}>{project.description}</Editable>
+                             <Editable className="text-gray-600 mt-1 whitespace-pre-wrap text-xs text-justify" onUpdate={v => onProjectChange(section, item.originalIndex, index, 'description', v)}>{project.description}</Editable>
                           </div>
                         ))}
                       </div>

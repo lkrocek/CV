@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import { CVPreview } from './components/CVPreview';
 import type { CVData } from './types';
@@ -81,7 +82,7 @@ const App: React.FC = () => {
     });
   }, [language]);
 
-  const handleSimpleChange = useCallback((field: keyof CVData, value: string) => {
+  const handleSimpleChange = useCallback((field: keyof CVData, value: string | string[]) => {
     setAllCvData(prev => ({
         ...prev,
         [language]: {...prev[language], [field]: value}

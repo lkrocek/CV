@@ -7,7 +7,7 @@ export const QuoteBubble: React.FC<{ language: 'en' | 'cs' }> = ({ language }) =
     };
 
     return (
-        <div className="absolute top-20 right-4 z-10 max-w-[180px] bg-gray-100/80 backdrop-blur-sm p-3 rounded-lg shadow-lg opacity-80">
+        <div className="max-w-[180px] bg-gray-100/80 backdrop-blur-sm p-3 rounded-lg shadow-lg opacity-80">
             <blockquote className="text-[10px] text-gray-800 italic text-center leading-tight">
                 “{quotes[language]}”
             </blockquote>

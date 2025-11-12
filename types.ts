@@ -1,4 +1,3 @@
-
 export interface Project {
   name: string;
   description: string;
@@ -7,9 +6,9 @@ export interface Project {
 export interface PersonalInfo {
   name: string;
   title: string;
-  phone: string;
-  email: string;
-  linkedin: string;
+  phone: string[];
+  email: string[];
+  linkedin: string[];
   address: string;
   profilePhoto: string;
 }
@@ -20,6 +19,7 @@ export interface Experience {
   period: string;
   description: string;
   projects?: Project[];
+  hideOnPageOne?: boolean;
 }
 
 export interface Education {
@@ -28,11 +28,18 @@ export interface Education {
   period: string;
   description: string;
   projects?: Project[];
+  hideOnPageOne?: boolean;
 }
 
 export interface Skill {
   name: string;
   children?: Skill[];
+}
+
+export interface OnlineLink {
+  url: string;
+  label: string;
+  description: string;
 }
 
 export interface CVData {
@@ -41,4 +48,6 @@ export interface CVData {
   experiences: Experience[];
   educations: Education[];
   skills: Skill[];
+  aboutMe: string[];
+  onlinePresence: OnlineLink[];
 }
