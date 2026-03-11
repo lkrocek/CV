@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import type { CVData } from '../types';
+import type { CVData, Language } from '../types';
 import { ShieldsLabel, SectionHeader, AboutMeSection, OnlinePresenceSection } from './common';
 import { SkillNode } from './Skills';
 import { TimelineNode, HistoryItem } from './History';
@@ -8,14 +8,11 @@ import { CodeBlock } from './CodeBlock';
 import { QuoteBubble } from './QuoteBubble';
 import { logoInfo } from './logos';
 
-type Language = 'en' | 'cs';
-
 interface CVPreviewProps {
   data: CVData;
   language: Language;
   onLanguageChange: React.Dispatch<React.SetStateAction<Language>>;
   onChange: <K extends keyof CVData>(section: K, index: number | null, field: string, value: string) => void;
-  onSimpleChange: (field: keyof CVData, value: string | string[]) => void;
   onProjectChange: (itemType: 'experiences' | 'educations', itemIndex: number, projIndex: number, field: string, value: string) => void;
 }
 

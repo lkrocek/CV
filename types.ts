@@ -51,3 +51,7 @@ export interface CVData {
   aboutMe: string[];
   onlinePresence: OnlineLink[];
 }
+
+export type Language = 'en' | 'cs';
+
+export type CvDataByLanguage = Record<Language, CVData>;
