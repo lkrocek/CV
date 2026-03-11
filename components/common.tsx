@@ -91,6 +91,22 @@ export const OnlinePresenceSection: React.FC<{
                         </div>
                     );
                 })}
+                <div>
+                    <a
+                        href="/storybook/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-white font-semibold rounded-sm shadow-md transition-shadow duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                    >
+                        <span className="bg-gray-600 px-3 py-1 text-xs font-bold rounded-l-sm">Storybook</span>
+                        <span className="bg-cyan-600 px-3 py-1 text-xs font-bold rounded-r-sm">/storybook/</span>
+                    </a>
+                    <p className="text-gray-600 mt-1 text-justify">
+                        {language === 'en'
+                            ? 'Component catalog served from the same host as the main app.'
+                            : 'Katalog komponent dostupny pod stejnym hostem jako hlavni aplikace.'}
+                    </p>
+                </div>
             </div>
         </section>
     );
