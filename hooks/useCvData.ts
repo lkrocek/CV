@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { sampleData, sampleDataCs } from '../constants';
 import type { CVData, CvDataByLanguage, Education, Experience, Language, Skill } from '../types';
-
-type HistoryResponse = {
-  experiences?: Experience[];
-  educations?: Education[];
-};
+import historyData from '../public/history.json';
+import photoData from '../public/photo.json';
+import skillsData from '../public/skills.json';
 
 const initialCvData: CvDataByLanguage = {
   en: sampleData,
@@ -16,43 +14,25 @@ export const useCvData = (language: Language) => {
   const [allCvData, setAllCvData] = useState<CvDataByLanguage>(initialCvData);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const [skillsResponse, historyResponse, photoResponse] = await Promise.all([
-          fetch('/skills.json'),
-          fetch('/history.json'),
-          fetch('/photo.json'),
-        ]);
-
-        const skillsData: Skill[] = skillsResponse.ok ? await skillsResponse.json() : [];
-        const historyData: HistoryResponse = historyResponse.ok ? await historyResponse.json() : {};
-        const photoData: { photo?: string } = photoResponse.ok ? await photoResponse.json() : {};
-
-        setAllCvData((prevData) => ({
-          en: {
-            ...prevData.en,
-            skills: skillsData,
-            experiences: historyData.experiences ?? [],
-            educations: historyData.educations ?? [],
-            personalInfo: {
-              ...prevData.en.personalInfo,
-              profilePhoto: photoData.photo || prevData.en.personalInfo.profilePhoto,
-            },
-          },
-          cs: {
-            ...prevData.cs,
-            personalInfo: {
-              ...prevData.cs.personalInfo,
-              profilePhoto: photoData.photo || prevData.cs.personalInfo.profilePhoto,
-            },
-          },
-        }));
-      } catch (error) {
-        console.error('Error loading CV data:', error);
-      }
-    };
-
-    void loadData();
+    setAllCvData((prevData) => ({
+      en: {
+        ...prevData.en,
+        skills: skillsData as Skill[],
+        experiences: (historyData.experiences ?? []) as Experience[],
+        educations: (historyData.educations ?? []) as Education[],
+        personalInfo: {
+          ...prevData.en.personalInfo,
+          profilePhoto: photoData.photo || prevData.en.personalInfo.profilePhoto,
+        },
+      },
+      cs: {
+        ...prevData.cs,
+        personalInfo: {
+          ...prevData.cs.personalInfo,
+          profilePhoto: photoData.photo || prevData.cs.personalInfo.profilePhoto,
+        },
+      },
+    }));
   }, []);
 
   const updateSectionField = useCallback(<K extends keyof CVData>(
