@@ -5,40 +5,51 @@ import { ProfileHero } from './profile/ProfileHero';
 import { ProfileSidebar } from './profile/ProfileSidebar';
 import { ProfileTopBar } from './profile/ProfileTopBar';
 import { QuickOverview } from './profile/QuickOverview';
+import { Reveal } from './profile/Reveal';
 import { TechnologyExplorer } from './profile/TechnologyExplorer';
 import {
-  buildTechnologyInsights,
   flattenSkills,
   formatDuration,
   getCareerSpanMonths,
-  getFeaturedProjects,
   getHeroPills,
   getProfileHighlights,
-  getVisibleExperiences,
   profileCopy,
 } from './profile/profileContent';
+import type { TechnologyInsight } from './profile/profileContent';
 
 interface CVPreviewProps {
   data: CVData;
+  insights: TechnologyInsight[];
+  isDarkMode: boolean;
+  isDownloadingPdf?: boolean;
   language: Language;
   onLanguageChange: React.Dispatch<React.SetStateAction<Language>>;
+  onThemeToggle: () => void;
+  onDownloadPdf: () => void;
   onChange: <K extends keyof CVData>(section: K, index: number | null, field: string, value: string) => void;
-  onProjectChange: (itemType: 'experiences' | 'educations', itemIndex: number, projIndex: number, field: string, value: string) => void;
+  onProjectChange: (companyIndex: number, roleIndex: number, projectIndex: number, field: string, value: string) => void;
 }
 
-export const CVPreview: React.FC<CVPreviewProps> = ({ data, language, onLanguageChange }) => {
-  const [activeTechnology, setActiveTechnology] = React.useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = React.useState(true);
+export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode, isDownloadingPdf = false, language, onLanguageChange, onThemeToggle, onDownloadPdf }) => {
+  const [activeTechnology, setActiveTechnology] = React.useState<string | null>(() => {
+    if (typeof globalThis === 'undefined' || !globalThis.location.hash.startsWith('#skills')) {
+      return null;
+    }
+
+    const queryStart = globalThis.location.hash.indexOf('?');
+    if (queryStart === -1) return null;
+
+    return new URLSearchParams(globalThis.location.hash.slice(queryStart + 1)).get('tech');
+  });
+  const [activeView, setActiveView] = React.useState<'about' | 'experience'>('about');
   const highlights = getProfileHighlights(data);
-  const heroPills = getHeroPills(data);
+  const heroPills = getHeroPills(data, language);
   const expertise = flattenSkills(data.skills).slice(0, 4);
-  const featuredProjects = getFeaturedProjects(data);
-  const experiences = getVisibleExperiences(data);
-  const insights = buildTechnologyInsights(data);
+  const printSkills = insights.map((insight) => insight.name);
   const copy = profileCopy[language];
   const overviewItems = [
-    { label: copy.totalCareerSpan, value: formatDuration(getCareerSpanMonths(data)) },
-    { label: copy.companies, value: String(new Set(data.experiences.map((experience) => experience.company)).size) },
+    { label: copy.totalCareerSpan, value: formatDuration(getCareerSpanMonths(data), language) },
+    { label: copy.companies, value: String(data.companies.length) },
     { label: copy.technologiesTracked, value: String(insights.length) },
   ];
 
@@ -52,30 +63,54 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, language, onLanguage
     >
       <div className={`absolute inset-0 pointer-events-none ${isDarkMode ? 'bg-[linear-gradient(168deg,transparent_12%,rgba(138,152,255,0.1)_13%,transparent_15%,transparent_48%,rgba(138,152,255,0.08)_49%,transparent_51%)] opacity-70' : 'bg-[linear-gradient(168deg,transparent_12%,rgba(255,255,255,0.55)_13%,transparent_15%,transparent_48%,rgba(148,163,184,0.12)_49%,transparent_51%)] opacity-90'}`} />
       <div className={`absolute inset-0 pointer-events-none ${isDarkMode ? 'bg-[radial-gradient(circle_at_center,transparent,rgba(1,4,12,0.42)_68%,rgba(1,4,12,0.78)_100%)]' : 'bg-[radial-gradient(circle_at_center,transparent,rgba(255,255,255,0.12)_64%,rgba(226,232,240,0.62)_100%)]'}`} />
+      <div className={`absolute inset-0 pointer-events-none ${isDarkMode ? 'bg-[radial-gradient(circle_at_12%_16%,rgba(96,165,250,0.12),transparent_24%),radial-gradient(circle_at_84%_20%,rgba(129,140,248,0.14),transparent_18%),radial-gradient(circle_at_72%_82%,rgba(45,212,191,0.08),transparent_18%)]' : 'bg-[radial-gradient(circle_at_12%_16%,rgba(125,211,252,0.18),transparent_24%),radial-gradient(circle_at_84%_20%,rgba(199,210,254,0.24),transparent_18%),radial-gradient(circle_at_72%_82%,rgba(148,163,184,0.12),transparent_18%)]'}`} />
 
       <div className="relative">
         <ProfileTopBar
+          activeView={activeView}
           isDarkMode={isDarkMode}
+          isDownloading={isDownloadingPdf}
           language={language}
-          onDownload={() => window.print()}
+          onDownload={onDownloadPdf}
           onLanguageToggle={() => onLanguageChange((prev) => (prev === 'en' ? 'cs' : 'en'))}
-          onThemeToggle={() => setIsDarkMode((prev) => !prev)}
+          onThemeToggle={onThemeToggle}
+          onViewChange={setActiveView}
         />
 
         <main className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-16 pt-10 lg:px-10 lg:pb-24 lg:pt-14">
-          <ProfileHero data={data} highlights={highlights} language={language} pills={heroPills} />
-          <QuickOverview items={overviewItems} />
-          <TechnologyExplorer
-            activeTechnology={activeTechnology}
-            insights={insights}
-            language={language}
-            onSelectTechnology={setActiveTechnology}
-          />
+          <ProfileHero data={data} highlights={highlights} isDarkMode={isDarkMode} pills={heroPills} />
 
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,1.7fr)_320px]">
-            <ProfileExperienceSection experiences={experiences} language={language} skillPills={heroPills.length ? heroPills : expertise} />
-            <ProfileSidebar data={data} expertise={expertise.length ? expertise : heroPills} featuredProjects={featuredProjects} language={language} />
-          </div>
+          {activeView === 'about' && (
+            <>
+              <QuickOverview isDarkMode={isDarkMode} items={overviewItems} />
+              <Reveal delayMs={40}>
+                <TechnologyExplorer
+                  activeTechnology={activeTechnology}
+                  insights={insights}
+                  isDarkMode={isDarkMode}
+                  language={language}
+                  onSelectTechnology={setActiveTechnology}
+                />
+              </Reveal>
+              <ProfileSidebar
+                data={data}
+                expertise={expertise.length ? expertise : heroPills}
+                isDarkMode={isDarkMode}
+                language={language}
+              />
+            </>
+          )}
+
+          {activeView === 'experience' && (
+            <Reveal>
+              <ProfileExperienceSection
+                companies={data.companies}
+                isDarkMode={isDarkMode}
+                language={language}
+                skillPills={printSkills}
+              />
+            </Reveal>
+          )}
         </main>
       </div>
     </div>

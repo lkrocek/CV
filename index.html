@@ -5,32 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV - Lukas Krocek</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Manrope', 'sans-serif'],
-              display: ['Space Grotesk', 'sans-serif'],
-            },
-            colors: {
-              ink: '#060816',
-              panel: '#0e1330',
-              line: 'rgba(148, 163, 184, 0.16)',
-              glow: '#8ea2ff',
-              accent: '#d7c37a',
-            },
-            boxShadow: {
-              aurora: '0 18px 90px rgba(53, 71, 164, 0.28)',
-            }
-          }
-        }
-      }
-    </script>
     <style>
       :root {
         color-scheme: dark;
@@ -42,25 +16,117 @@
       }
 
       body {
-        min-height: 100vh;
         margin: 0;
+        overflow: hidden;
         background: #050816;
       }
+
+      #app-scroll {
+        height: 100vh;
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+      }
+
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: radial-gradient(circle at top left, rgba(79,91,198,0.32), transparent 26%),
+                    radial-gradient(circle at 85% 18%, rgba(60,84,166,0.24), transparent 18%),
+                    linear-gradient(180deg, #050816 0%, #070c1b 36%, #050713 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        transition: opacity 0.6s ease;
+      }
+
+      #splash.splash-light {
+        background: radial-gradient(circle at top left, rgba(199,210,254,0.7), transparent 24%),
+                    radial-gradient(circle at 80% 18%, rgba(191,219,254,0.65), transparent 20%),
+                    linear-gradient(180deg, #f8fafc 0%, #eef2ff 34%, #e2e8f0 100%);
+      }
+
+      #splash.splash-light .splash-name {
+        color: #1e293b;
+      }
+
+      #splash.splash-light .splash-name span {
+        color: #4f46e5;
+      }
+
+      #splash.splash-light .splash-dot {
+        background: #4f46e5;
+      }
+
+      #splash.splash-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-name {
+        font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 700;
+        color: #e2e8f0;
+        letter-spacing: -0.02em;
+        opacity: 0;
+        animation: splash-fade-in 0.7s ease 0.1s forwards;
+      }
+
+      .splash-name span {
+        color: #8ea2ff;
+      }
+
+      .splash-dots {
+        display: flex;
+        gap: 8px;
+        opacity: 0;
+        animation: splash-fade-in 0.5s ease 0.5s forwards;
+      }
+
+      .splash-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #8ea2ff;
+        animation: splash-pulse 1.2s ease-in-out infinite;
+      }
+
+      .splash-dot:nth-child(2) { animation-delay: 0.2s; }
+      .splash-dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes splash-fade-in {
+        to { opacity: 1; }
+      }
+
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 0.3; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.2); }
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
-    "react": "https://esm.sh/react@19.2.0?dev",
-    "react-dom/client": "https://esm.sh/react-dom@19.2.0/client?dev",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
-  }
-}
-</script>
-</head>
-  <body class="bg-gray-50 font-sans">
-    <div id="root"></div>
+  </head>
+  <body>
+    <div id="app-scroll">
+      <div id="root"></div>
+    </div>
+    <div id="splash">
+      <div class="splash-name">Lukáš <span>Kroček</span></div>
+      <div class="splash-dots">
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+      </div>
+    </div>
+    <script>
+      try {
+        if (localStorage.getItem('cv-theme') === 'light') {
+          document.getElementById('splash').classList.add('splash-light');
+          document.body.style.background = '#f8fafc';
+        }
+      } catch (e) {}
+    </script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

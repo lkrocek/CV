@@ -1,6 +1,21 @@
 export interface Project {
   name: string;
   description: string;
+  technologies?: string[];
+  from: string;
+  to: string | null;
+}
+
+export interface Role {
+  title: string;
+  description: string;
+  projects?: Project[];
+}
+
+export interface Company {
+  name: string;
+  roles: Role[];
+  hideOnPageOne?: boolean;
 }
 
 export interface PersonalInfo {
@@ -13,19 +28,11 @@ export interface PersonalInfo {
   profilePhoto: string;
 }
 
-export interface Experience {
-  role: string;
-  company: string;
-  period: string;
-  description: string;
-  projects?: Project[];
-  hideOnPageOne?: boolean;
-}
-
 export interface Education {
   degree: string;
   institution: string;
-  period: string;
+  from: string;
+  to: string | null;
   description: string;
   projects?: Project[];
   hideOnPageOne?: boolean;
@@ -45,7 +52,7 @@ export interface OnlineLink {
 export interface CVData {
   personalInfo: PersonalInfo;
   summary: string;
-  experiences: Experience[];
+  companies: Company[];
   educations: Education[];
   skills: Skill[];
   aboutMe: string[];
@@ -55,3 +62,43 @@ export interface CVData {
 export type Language = 'en' | 'cs';
 
 export type CvDataByLanguage = Record<Language, CVData>;
+
+// ─── Source format (history.json) ───────────────────────────────────────────
+// Structural fields (dates, technologies) are shared; text fields are i18n.
+
+export type I18nField = string | { en: string; cs: string };
+
+export interface SourceProject {
+  name: I18nField;
+  description: { en: string; cs: string };
+  technologies?: string[];
+  from: string;
+  to: string | null;
+}
+
+export interface SourceRole {
+  title: I18nField;
+  description: { en: string; cs: string };
+  projects?: SourceProject[];
+}
+
+export interface SourceCompany {
+  name: string;
+  roles: SourceRole[];
+  hideOnPageOne?: boolean;
+}
+
+export interface SourceEducation {
+  degree: I18nField;
+  institution: I18nField;
+  from: string;
+  to: string | null;
+  description: { en: string; cs: string };
+  projects?: SourceProject[];
+  hideOnPageOne?: boolean;
+}
+
+export interface HistoryData {
+  companies: SourceCompany[];
+  educations: SourceEducation[];
+}
