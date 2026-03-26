@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorer.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Interactive drill-down from technology names to concrete experience evidence.</Subtitle>
+<Description>
+This is the exploratory part of the CV. Visitors can start with a technology they care about and
+immediately see total exposure, matching companies and project contexts. The goal is fast relevance matching.
+</Description>
+
+## Responsibilities
+
+- Turn flat skill lists into evidence-backed exploration.
+- Provide drill-down without leaving the main page.
+- Support both recruiter scanning and deeper technical inspection.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './QuickOverview.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>High-signal metric cards for the first scan of the profile.</Subtitle>
+<Description>
+These cards compress the CV into 2-3 numbers that support credibility before the visitor reads
+longer sections. The content should stay sparse and measurable.
+</Description>
+
+## Responsibilities
+
+- Highlight metrics with strong visual hierarchy.
+- Stay short enough to scan in a second.
+- Reinforce credibility without replacing the detailed sections.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

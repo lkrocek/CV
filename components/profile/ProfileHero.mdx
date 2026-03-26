@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProfileHero.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Hero section that frames identity, positioning and first-scan highlights.</Subtitle>
+<Description>
+The hero is the first screen-level trust anchor. It combines portrait, headline, short proof points
+and a compact skill strip. It should answer who this person is and why the visitor should continue.
+</Description>
+
+## Responsibilities
+
+- Provide immediate personal context.
+- Surface the strongest summary bullets.
+- Expose the most recognizable technologies as quick-scan pills.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+
