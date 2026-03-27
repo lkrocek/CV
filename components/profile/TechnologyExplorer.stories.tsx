@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TechnologyExplorer } from './TechnologyExplorer';
-import { getStoryLayoutProps } from './storybookData';
+import { getStoryLayoutProps, storyData } from './storybookData';
 
 const props = getStoryLayoutProps('en');
 
@@ -12,7 +12,9 @@ const meta = {
     activeTechnology: props.insights[0]?.name ?? null,
     insights: props.insights,
     isDarkMode: true,
+    isActive: true,
     language: 'en',
+    skills: storyData.skills,
     onSelectTechnology: () => {},
   },
   render: (args, context) => {

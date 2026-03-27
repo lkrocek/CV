@@ -25,7 +25,10 @@
                 "JavaScript",
                 "Webpack",
                 "Jest",
+                "WebWorker",
+                "PostMessage",
                 "Storybook",
+                "MS Windows",
                 "AI Code Assist",
                 "TeamCity",
                 "Jira",
@@ -55,7 +58,7 @@
             {
               "name": "AgeCraft",
               "from": "2025-08",
-              "to": null,
+              "to": "2025-12",
               "description": {
                 "en": "A browser-based strategy game built with Vibe Coding methodology. Features real-time game loop, state management, and responsive UI.",
                 "cs": "Prohlížečová strategická hra postavená metodou Vibe Coding s real-time herní smyčkou, správou stavu a responzivním UI."
@@ -63,8 +66,13 @@
               "technologies": [
                 "React",
                 "Redux",
+                "MS Windows",
                 "TypeScript",
                 "JavaScript",
+                "Jest",
+                "WebRTC",
+                "WebWorker",
+                "Canvas",
                 "Vite"
               ]
             },
@@ -74,7 +82,7 @@
                 "cs": "Interaktivní CV"
               },
               "from": "2025-08",
-              "to": null,
+              "to": "2025-12",
               "description": {
                 "en": "A digital, interactive CV built as a living portfolio showcase with technology exploration and Storybook component documentation.",
                 "cs": "Digitální, interaktivní životopis jako živé portfolio s průzkumem technologií a dokumentací komponent ve Storybooku."
@@ -83,6 +91,7 @@
                 "React",
                 "TypeScript",
                 "JavaScript",
+                "MS Windows",
                 "Vite",
                 "Storybook",
                 "Tailwind CSS",
@@ -121,6 +130,8 @@
                 "JavaScript",
                 "TypeScript",
                 "Webpack",
+                "WebSockets",
+                "MS Windows",
                 "Jira",
                 "Git",
                 "HTML5",
@@ -144,6 +155,7 @@
                 "AngularJS:1.7",
                 "WebSockets",
                 "JavaScript",
+                "MS Windows",
                 "TypeScript",
                 "Webpack",
                 "Jest",
@@ -180,6 +192,7 @@
                 "Performance optimization",
                 "Git",
                 "E2E Testing",
+                "MS Windows",
                 "Unit Tests",
                 "Grunt",
                 "Jira"
@@ -202,15 +215,35 @@
                 "WebSockets",
                 "WebRTC",
                 "REST API",
-                "PostMessage API",
+                "WebWorker",
+                "PostMessage",
+                "WireShark",
+                "RaspberryPi I/O",
+                "Node.js",
+                "Arduino",
+                "CheatEngine",
                 "FileSystem/Storage API",
                 "Samsung SmartTv",
+                "HbbTV",
+                "HTML5",
+                "HTML-based",
+                "CSS3",
+                "Freeview Play",
+                "ATSC 3.0",
+                "Android",
+                "iOS",
+                "Xfinity",
+                "Fire TV",
                 "LG Smart Tv",
+                "Mocha",
+                "VirtualBox",
+                "Debian",
                 "Playstation 4/5",
                 "Xbox One",
                 "E2E Testing",
                 "Unit Tests",
                 "Webpack",
+                "MS Windows",
                 "Jira",
                 "Git"
               ]
@@ -242,8 +275,10 @@
                 "Redux",
                 "JavaScript",
                 "TypeScript",
+                "MS Windows",
                 "HbbTV",
                 "CSS3",
+                "HTML-based",
                 "xHTML",
                 "Unit Tests",
                 "Webpack",
@@ -262,8 +297,10 @@
               "technologies": [
                 "JavaScript",
                 "xHTML",
+                "HTML-based",
                 "CSS3",
                 "Grunt",
+                "MS Windows",
                 "Jira",
                 "Git"
               ]
@@ -282,8 +319,10 @@
               "technologies": [
                 "JavaScript",
                 "xHTML",
+                "HTML-based",
                 "SmartTv",
                 "HbbTV",
+                "MS Windows",
                 "REST API",
                 "Git",
                 "GitLab",
@@ -303,7 +342,9 @@
                 "JavaScript",
                 "REST API",
                 "Git",
+                "HTML-based",
                 "GitLab",
+                "MS Windows",
                 "HTML5",
                 "CSS3",
                 "Less",
@@ -324,13 +365,17 @@
               "technologies": [
                 "JavaScript",
                 "Socket.io",
+                "HTML-based",
+                "MongoDB",
                 "HTML5",
                 "CSS3",
                 "Git",
+                "MS Windows",
                 "GitLab",
                 "Nginx",
                 "VirtualBox",
                 "Less",
+                "Express",
                 "Node.js"
               ]
             }
@@ -364,6 +409,7 @@
                 "xHTML",
                 "CSS3",
                 "XML",
+                "MS Windows",
                 "XSLT",
                 "jQuery"
               ]
@@ -384,6 +430,7 @@
                 "JSON",
                 "REST API",
                 "JavaScript",
+                "MS Windows",
                 "HTML5",
                 "CSS3"
               ]
@@ -404,6 +451,7 @@
                 "MySQL",
                 "XSLT",
                 "xHTML",
+                "MS Windows",
                 "XML",
                 "XHR",
                 "CSS3",
@@ -446,6 +494,7 @@
                 "CSS3",
                 "HTML4",
                 "Bugzilla",
+                "Ubuntu",
                 "HG mercurial",
                 "jQuery"
               ]
@@ -465,6 +514,7 @@
                 "HTML4",
                 "JavaScript",
                 "Bugzilla",
+                "Ubuntu",
                 "HG",
                 "jQuery"
               ]
@@ -487,6 +537,7 @@
                 "HTML4",
                 "JavaScript",
                 "Bugzilla",
+                "Ubuntu",
                 "HG",
                 "jQuery",
                 "Google Maps API"
@@ -504,10 +555,11 @@
                 "PHP",
                 "MySQL",
                 "CSS3",
-                "HTML4",
+                "xHTML",
                 "JavaScript",
                 "Bugzilla",
                 "SVN",
+                "Ubuntu",
                 "jQuery"
               ]
             },
@@ -526,7 +578,8 @@
                 "PHP",
                 "MySQL",
                 "CSS3",
-                "HTML4",
+                "xHTML",
+                "Ubuntu",
                 "JavaScript",
                 "Bugzilla",
                 "SVN"

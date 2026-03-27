@@ -33,6 +33,11 @@ type Copy = {
   sortAscending: string;
   sortNewestFirst: string;
   sortOldestFirst: string;
+  filterAllGroups: string;
+  filterGroupsCount: string;
+  filterClearSelection: string;
+  filterInvertSelection: string;
+  filterSelectOnly: string;
 };
 
 export const profileCopy: Record<Language, Copy> = {
@@ -69,6 +74,11 @@ export const profileCopy: Record<Language, Copy> = {
     sortAscending: 'Ascending',
     sortNewestFirst: 'Newest first',
     sortOldestFirst: 'Oldest first',
+    filterAllGroups: 'All groups',
+    filterGroupsCount: 'groups',
+    filterClearSelection: 'Clear selection',
+    filterInvertSelection: 'Invert selection',
+    filterSelectOnly: 'Select only this group',
   },
   cs: {
     about: 'O mně',
@@ -103,6 +113,11 @@ export const profileCopy: Record<Language, Copy> = {
     sortAscending: 'Vzestupně',
     sortNewestFirst: 'Od nejnovějších',
     sortOldestFirst: 'Od nejstarších',
+    filterAllGroups: 'Všechny skupiny',
+    filterGroupsCount: 'skupin',
+    filterClearSelection: 'Zrušit výběr',
+    filterInvertSelection: 'Obrátit výběr',
+    filterSelectOnly: 'Vybrat pouze tuto skupinu',
   },
 };
 

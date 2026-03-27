@@ -92,6 +92,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
                 isDarkMode={isDarkMode}
                 isActive={activeView === 'about'}
                 language={language}
+                skills={data.skills}
                 onSelectTechnology={setActiveTechnology}
               />
             </Reveal>
