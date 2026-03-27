@@ -1,20 +1,74 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Interactive CV
 
-# Run and deploy your AI Studio app
+A personal CV built as a single-page React application — fully interactive, bilingual, and exportable to PDF.
 
-This contains everything you need to run your app locally.
+**Live:** [lkrocek.github.io/CV](https://lkrocek.github.io/CV) &nbsp;·&nbsp; **Storybook:** [lkrocek.github.io/CV/storybook](https://lkrocek.github.io/CV/storybook)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1HiukAQOYZk6o28EDeZQu60BqQtPJvsEw
+---
 
-## Run Locally
+## Features
 
-**Prerequisites:**  Node.js
+- **Bilingual** — Czech / English toggle, persisted across sessions
+- **Dark & light theme** — persisted across sessions
+- **PDF export** — client-side, generated via `@react-pdf/renderer`
+- **Technology Explorer** — interactive skill timeline computed in a Web Worker
+- **Hash-based navigation** — `#experience`, `#skills?tech=React`, etc. are shareable URLs
+- **Animated splash screen** — minimum 1.8 s display while data and workers initialize
+- **Storybook** — component documentation with accessibility checks
 
+## Tech stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+| Layer | Library |
+|---|---|
+| UI | React 19, TypeScript |
+| Build | Vite 6 |
+| Styling | Tailwind CSS 4 |
+| PDF | @react-pdf/renderer 4 |
+| Testing | Vitest + Playwright |
+| Docs | Storybook 10 |
+
+## Getting started
+
+```bash
+npm install
+npm run dev       # http://localhost:3000
+```
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Dev server on port 3000 |
+| `npm run build` | Production build → `dist/` |
+| `npm run build:all` | Build Storybook + production build |
+| `npm run preview` | Preview production build locally |
+| `npm test` | Run tests once |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run storybook` | Storybook dev server on port 6006 |
+
+## Data
+
+CV content is loaded at runtime from `/public/`:
+
+| File | Content |
+|---|---|
+| `history.json` | Companies, roles, projects (i18n) |
+| `skills.json` | Hierarchical skill tree |
+| `photo.json` | Profile photo reference |
+
+All text fields support bilingual values via `{ en: string; cs: string }` or a plain `string`.
+
+## Project structure
+
+```
+├── components/
+│   ├── CVPreview.tsx          # Top-level layout
+│   ├── pdf/CvPdfDocument.tsx  # PDF-specific layout
+│   └── profile/               # All profile sections and UI components
+├── hooks/
+│   ├── useCvData.ts           # CV data loading and state
+│   └── useTechnologyInsights.ts  # Web Worker bridge
+├── workers/insightsWorker.ts  # Insight computation off the main thread
+├── public/                    # CV data JSON + assets
+└── constants.ts               # Fallback sample data
+```
