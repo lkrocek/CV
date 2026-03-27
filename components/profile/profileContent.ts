@@ -151,11 +151,11 @@ export const getProfileHighlights = (data: CVData): string[] => {
   return [...summarySentences, ...aboutLines].slice(0, 3);
 };
 
-export const getHeroPills = (_data: CVData, language: Language): string[] => (
-  language === 'cs'
-    ? ['15+ let', 'React architektura', 'Performance', 'Enterprise UI', 'TypeScript']
-    : ['15+ years', 'React architecture', 'Performance', 'Enterprise UI', 'TypeScript']
-);
+export const getHeroPills = (data: CVData, language: Language): string[] => {
+  const years = Math.round(getCareerSpanMonths(data) / 12);
+  const yearsLabel = language === 'cs' ? `~${years} let` : `~${years} years`;
+  return [yearsLabel, 'Entertainment UI', 'Enterprise UI', 'Performance', 'TypeScript'];
+};
 
 export const getFeaturedProjects = (data: CVData): string[] => {
   const projects = data.companies.flatMap((company) =>

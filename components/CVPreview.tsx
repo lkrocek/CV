@@ -4,16 +4,12 @@ import { ProfileExperienceSection } from './profile/ProfileExperienceSection';
 import { ProfileHero } from './profile/ProfileHero';
 import { ProfileSidebar } from './profile/ProfileSidebar';
 import { ProfileTopBar } from './profile/ProfileTopBar';
-import { QuickOverview } from './profile/QuickOverview';
 import { Reveal } from './profile/Reveal';
 import { TechnologyExplorer } from './profile/TechnologyExplorer';
 import {
   flattenSkills,
-  formatDuration,
-  getCareerSpanMonths,
   getHeroPills,
   getProfileHighlights,
-  profileCopy,
 } from './profile/profileContent';
 import type { TechnologyInsight } from './profile/profileContent';
 
@@ -48,12 +44,6 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
   const heroPills = getHeroPills(data, language);
   const expertise = flattenSkills(data.skills).slice(0, 4);
   const printSkills = insights.map((insight) => insight.name);
-  const copy = profileCopy[language];
-  const overviewItems = [
-    { label: copy.totalCareerSpan, value: formatDuration(getCareerSpanMonths(data), language) },
-    { label: copy.companies, value: String(data.companies.length) },
-    { label: copy.technologiesTracked, value: String(insights.length) },
-  ];
 
   return (
     <div
@@ -84,7 +74,6 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
           <ProfileHero data={data} highlights={highlights} isDarkMode={isDarkMode} pills={heroPills} />
 
           <div className={activeView !== 'about' ? 'hidden' : 'contents'}>
-            <QuickOverview isDarkMode={isDarkMode} items={overviewItems} />
             <Reveal delayMs={40}>
               <TechnologyExplorer
                 activeTechnology={activeTechnology}
