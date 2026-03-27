@@ -3,6 +3,7 @@ import type { CVData, Company, Language, Project, Role, Skill } from '../../type
 type Copy = {
   about: string;
   experience: string;
+  experienceSection: string;
   skills: string;
   projects: string;
   download: string;
@@ -44,6 +45,7 @@ export const profileCopy: Record<Language, Copy> = {
   en: {
     about: 'About',
     experience: 'Print version',
+    experienceSection: 'Experience',
     skills: 'Skills',
     projects: 'Projects',
     download: 'Download CV (PDF)',
@@ -83,6 +85,7 @@ export const profileCopy: Record<Language, Copy> = {
   cs: {
     about: 'O mně',
     experience: 'Tisková verze',
+    experienceSection: 'Zkušenosti',
     skills: 'Dovednosti',
     projects: 'Projekty',
     download: 'Stáhnout CV (PDF)',

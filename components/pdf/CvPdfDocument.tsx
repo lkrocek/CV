@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 10,
-    marginBottom: 2,
+    marginBottom: 5,
   },
   roleTitle: {
     fontSize: 11,
@@ -179,13 +179,13 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     color: '#334155',
-    lineHeight: 1.28,
+    lineHeight: 0.8,
   },
   roleDescription: {
     color: '#334155',
-    lineHeight: 1.18,
-    marginTop: 3,
-    marginBottom: 3,
+    lineHeight: 0.8,
+    marginTop: 4,
+    marginBottom: 4,
   },
   projectsList: {
     marginTop: 4,
