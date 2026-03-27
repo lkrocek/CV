@@ -31,7 +31,7 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ data, highlights, isDa
       </Reveal>
       <div>
         <Reveal delayMs={110} y={20}>
-          <h1 className={`font-display text-5xl font-bold tracking-tight sm:text-6xl ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.personalInfo.name}</h1>
+          <h1 className={`font-name text-5xl font-bold tracking-tight sm:text-6xl ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.personalInfo.name}</h1>
         </Reveal>
         <Reveal delayMs={180} y={20}>
           <p className={`mt-4 text-2xl sm:text-3xl ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>{data.personalInfo.title}</p>

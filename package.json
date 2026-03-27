@@ -21,6 +21,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",
     "@fontsource/manrope": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
     "@fontsource/space-grotesk": "^5.2.10",
     "@storybook/addon-a11y": "^10.2.17",
     "@storybook/addon-docs": "^10.2.17",
