@@ -27,6 +27,8 @@ Font.register({
   ],
 });
 
+Font.registerHyphenationCallback((word) => [word]);
+
 const styles = StyleSheet.create({
   page: {
     backgroundColor: '#f8fafc',
@@ -90,19 +92,19 @@ const styles = StyleSheet.create({
   },
   summaryBlock: {
     marginTop: 1,
-    paddingLeft: 92,
-    maxWidth: 470,
   },
   summaryLead: {
     color: '#1e293b',
     fontSize: 11,
     lineHeight: 1.26,
     marginBottom: 2,
+    textAlign: 'justify',
   },
   summary: {
     color: '#334155',
     fontSize: 11,
     lineHeight: 1.28,
+    textAlign: 'justify',
   },
   contact: {
     width: 170,
@@ -178,6 +180,12 @@ const styles = StyleSheet.create({
   bodyText: {
     color: '#334155',
     lineHeight: 1.28,
+  },
+  roleDescription: {
+    color: '#334155',
+    lineHeight: 1.18,
+    marginTop: 3,
+    marginBottom: 3,
   },
   projectsList: {
     marginTop: 4,
@@ -297,7 +305,7 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
         <View style={styles.grid}>
           <View style={styles.mainColumn}>
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{copy.experience}</Text>
+              <Text style={styles.sectionTitle}>{copy.experienceSection}</Text>
               {data.companies.map((company, companyIndex) => (
                 <View key={`${company.name}-${companyIndex}`} style={styles.companyBlock}>
                   <Text style={styles.companyName}>{company.name}</Text>
@@ -307,7 +315,7 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
                         <Text style={styles.roleTitle}>{role.title}</Text>
                         <Text style={styles.period}>{formatPeriod(role.projects ?? [], language)}</Text>
                       </View>
-                      <Text style={styles.bodyText}>{role.description}</Text>
+                      <Text style={styles.roleDescription}>{role.description}</Text>
                       <View style={styles.projectsList}>{renderProjectSummary(role.projects)}</View>
                     </View>
                   ))}
