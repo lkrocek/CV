@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProfileExperienceSection.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Condensed experience timeline for the most relevant work history.</Subtitle>
+<Description>
+This section translates the full CV into a readable shortlist. It should emphasize company, role,
+period and selected outcomes without becoming a full document dump.
+</Description>
+
+## Responsibilities
+
+- Prioritize the most relevant experience blocks.
+- Keep readability under one-screen scanning conditions.
+- Preserve room for future expansion into richer project details.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

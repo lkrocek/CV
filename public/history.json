@@ -1,93 +1,651 @@
 {
-  "experiences": [
+  "companies": [
     {
-      "role": "Professional Development",
-      "company": "Self-employed",
-      "period": "8/2025 - Now",
-      "description": "Continuously enhancing skills and exploring new technologies to stay at the forefront of web development.",
-      "projects": [
-        { "name": "Vibe Coding", "description": "Utilizing advanced AI tools for rapid prototyping and accelerated project development." },
-        { "name": "Working with new techs", "description": "Building modern, full-stack applications using cutting-edge frameworks like Next.js, Nest.js, and Vite." }
+      "name": "Inphinity",
+      "roles": [
+        {
+          "title": "Senior Frontend Developer",
+          "description": {
+            "en": "Senior Frontend Developer in the Business Intelligence domain, building and maintaining extensions for the Qlik analytics platform. Working within an agile team using TeamCity, Jira, and AI-assisted workflows.",
+            "cs": "Senior Frontend Developer v oblasti Business Intelligence, vývoj a údržba rozšíření pro analytickou platformu Qlik. Práce v agilním týmu s využitím TeamCity, Jira a AI-asistovaných workflow."
+          },
+          "projects": [
+            {
+              "name": "Qlik Extension Platform",
+              "from": "2025-12",
+              "to": null,
+              "description": {
+                "en": "Development and maintenance of frontend extensions for the Qlik BI platform. Focused on performance optimization of a new feature and maintaining code quality through unit tests and component documentation.",
+                "cs": "Vývoj a údržba frontendových rozšíření pro BI platformu Qlik. Zaměření na optimalizaci výkonu nové funkce a udržování kvality kódu prostřednictvím unit testů a dokumentace komponent."
+              },
+              "technologies": [
+                "React",
+                "Angular",
+                "TypeScript",
+                "JavaScript",
+                "Webpack",
+                "Jest",
+                "Storybook",
+                "AI Code Assist",
+                "TeamCity",
+                "Jira",
+                "Git",
+                "HTML5",
+                "CSS3",
+                "REST API"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Frontend Web Developer",
-      "company": "Suitest®",
-      "period": "12/2024 - 07/2025",
-      "description": "Responsible for the maintenance and feature development of the core Suitest frontend application, ensuring high performance and a seamless user experience. Key technologies included GIT, Figma, Jira, and Docker.",
-      "projects": [
-        { "name": "UI Overhaul", "description": "Helped manage the application's technical stack, including React, Redux, AngularJS, Storybook, and TypeScript, and assisted with the migration from Webpack 4 to 5. Enhanced code quality by increasing unit test coverage using Jest and Mocha and conducted rigorous code reviews within a 5-person agile team." },
-        { "name": "Features planning", "description": "Played a key role in feature planning, defining technical specifications and implementation strategies for new functionalities." }
+      "name": "Self-employed",
+      "roles": [
+        {
+          "title": {
+            "en": "Unemployed — Personal Development",
+            "cs": "Nezaměstnaný — Osobní rozvoj"
+          },
+          "description": {
+            "en": "Exploring AI-assisted development and modern full-stack frameworks including Next.js, Nest.js, Vite, and TypeScript. Utilizing advanced AI tooling for rapid prototyping and accelerated project delivery.",
+            "cs": "Zkoumání AI-asistovaného vývoje a moderních full-stack frameworků včetně Next.js, Nest.js, Vite a TypeScriptu. Využívání pokročilých AI nástrojů pro rychlé prototypování a akceleraci vývoje projektů."
+          },
+          "projects": [
+            {
+              "name": "AgeCraft",
+              "from": "2025-08",
+              "to": null,
+              "description": {
+                "en": "A browser-based strategy game built with Vibe Coding methodology. Features real-time game loop, state management, and responsive UI.",
+                "cs": "Prohlížečová strategická hra postavená metodou Vibe Coding s real-time herní smyčkou, správou stavu a responzivním UI."
+              },
+              "technologies": [
+                "React",
+                "Redux",
+                "TypeScript",
+                "JavaScript",
+                "Vite"
+              ]
+            },
+            {
+              "name": {
+                "en": "Interactive CV",
+                "cs": "Interaktivní CV"
+              },
+              "from": "2025-08",
+              "to": null,
+              "description": {
+                "en": "A digital, interactive CV built as a living portfolio showcase with technology exploration and Storybook component documentation.",
+                "cs": "Digitální, interaktivní životopis jako živé portfolio s průzkumem technologií a dokumentací komponent ve Storybooku."
+              },
+              "technologies": [
+                "React",
+                "TypeScript",
+                "JavaScript",
+                "Vite",
+                "Storybook",
+                "Tailwind CSS",
+                "Git"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Platform integration Specialist",
-      "company": "Suitest®",
-      "period": "2014 - 2024",
-      "description": "Pioneered the integration of diverse platforms into a unified cross-platform testing solution. Key contributor for OTT platforms including Roku, HbbTV, SmartTVs (Samsung, LG), Freeview Play, ATSC 3.0, Xbox, and PlayStation. In a small, dynamic team of three, we architected the entire application stack, encompassing frontend, backend, core libraries, and IoT device integrations (e.g., Arduino). Independently designed and developed library architectures, including a GUI for synchronized operations. Ensured high application quality through rigorous testing, code reviews, and the creation of a comprehensive suite of automated functional and unit tests for smoke testing and stability control. Utilized tools like GIT and Jira for version control and project management.",
-      "projects": [
-        { "name": "Roku (BrightScript)", "description": "(2019-2024) Developed and maintained a core Component Library for Roku, adapting the Suitest instrumentation library for the platform. This involved a complete rewrite in BrightScript for the ARM architecture, focusing on high-performance optimization and providing dedicated customer support." },
-        { "name": "OTT HTML-based applications", "description": "(2014-2024) Engineered and implemented a JavaScript library for End-to-End testing across various HTML-based OTT platforms. Utilized advanced browser technologies like WebSockets and PostMessages, and innovated an HTTP Storage technique for persistent data storage on devices lacking standard APIs (FileSystem, LocalStorage, Cookies, etc.)." },
-        { "name": "SwissTxt HbbTv", "description": "(2014-2019) Continued development of the SwissTxt application for the HbbTV platform. The application underwent a significant refactoring and architectural overhaul to adopt modern libraries like React and Redux, enabling the delivery of interactive broadcast experiences." },
-        { "name": "Advanced Network & Memory Analysis", "description": "Utilized tools like Wireshark and CheatEngine for in-depth analysis of network traffic and device memory." },
-        { "name": "Development Philosophy & Testing", "description": "I learned that a proper development approach must include automated tests. As every project grows over time, creating automated tests is essential to maintain a consistent pace and quality of development." }
+      "name": "Suitest",
+      "roles": [
+        {
+          "title": "Frontend Web Developer",
+          "description": {
+            "en": "Responsible for the maintenance and feature development of the core Suitest frontend application. Played a key role in feature planning, defining technical specifications and implementation strategies for new functionalities. Worked within a 5-person agile team using Git, Figma, Jira, and Docker.",
+            "cs": "Zodpovědnost za údržbu a vývoj klíčových funkcí hlavní frontendové aplikace Suitest. Podílel jsem se na plánování nových funkcí, definování technických specifikací a implementačních strategií. Práce v agilním týmu 5 lidí s využitím GIT, Figma, Jira a Docker."
+          },
+          "projects": [
+            {
+              "name": {
+                "en": "Frontend Maintenance and Enhancements",
+                "cs": "Údržba a vylepšování frontendu"
+              },
+              "from": "2024-03",
+              "to": "2025-07",
+              "description": {
+                "en": "Day-to-day maintenance, bug fixing, and continuous improvements of the existing frontend application and presentation websites.",
+                "cs": "Běžná údržba, opravy a průběžná vylepšení stávající frontendové aplikace a webových prezentačních stránek."
+              },
+              "technologies": [
+                "React",
+                "Redux",
+                "AngularJS:1.7",
+                "JavaScript",
+                "TypeScript",
+                "Webpack",
+                "Jira",
+                "Git",
+                "HTML5",
+                "CSS3"
+              ]
+            },
+            {
+              "name": {
+                "en": "Webpack 4→5 Migration",
+                "cs": "Migrace Webpack 4→5"
+              },
+              "from": "2024-12",
+              "to": "2025-07",
+              "description": {
+                "en": "Led the migration of the build toolchain from Webpack 4 to 5 while managing the React, Redux, AngularJS, and TypeScript stack. Increased unit test coverage using Jest and Mocha and conducted rigorous code reviews.",
+                "cs": "Vedl jsem migraci build toolchainu z Webpacku 4 na 5 při správě stacku React, Redux, AngularJS a TypeScript. Zvyšoval jsem pokrytí jednotkovými testy (Jest, Mocha) a prováděl code reviews."
+              },
+              "technologies": [
+                "React",
+                "Redux",
+                "AngularJS:1.7",
+                "WebSockets",
+                "JavaScript",
+                "TypeScript",
+                "Webpack",
+                "Jest",
+                "Mocha",
+                "Storybook",
+                "Jira",
+                "Git"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Platform Integration Specialist",
+          "description": {
+            "en": "Pioneered the integration of diverse platforms into a unified cross-platform testing solution. Key contributor for OTT platforms including Roku, HbbTV, Smart TVs, Freeview Play, ATSC 3.0, Xbox, and PlayStation. In a small team of three, architected the whole application stack including frontend, backend, shared libraries, and IoT integrations. Applied Wireshark and Cheat Engine for in-depth network and device memory analysis. Built comprehensive automated testing as a core practice across all projects.",
+            "cs": "Byl jsem průkopníkem v integraci různých platforem do jednotného multiplatformního testovacího řešení. Klíčový přispěvatel pro OTT platformy včetně Roku, HbbTV, SmartTV (Samsung, LG), Freeview Play, ATSC 3.0, Xbox a PlayStation. V malém týmu tří lidí jsme navrhli celý aplikační stack včetně frontendu, backendu, klíčových knihoven a IoT integrací. Využíval jsem Wireshark a CheatEngine pro analýzu sítě a paměti. Budoval jsem automatizované testování jako základní praxi všech projektů."
+          },
+          "projects": [
+            {
+              "name": {
+                "en": "Roku Component Library",
+                "cs": "Roku (BrightScript)"
+              },
+              "from": "2019-08",
+              "to": "2024-03",
+              "description": {
+                "en": "Developed and maintained a core component library for Roku and adapted the Suitest instrumentation library for the platform. Full rewrite in BrightScript for ARM devices with strong emphasis on performance and customer support.",
+                "cs": "Vyvinul a udržoval jsem klíčovou knihovnu komponent pro Roku. Kompletní přepsání do BrightScriptu pro ARM architekturu se zaměřením na optimalizaci výkonu."
+              },
+              "technologies": [
+                "BrightScript",
+                "Roku",
+                "WebSockets",
+                "Performance optimization",
+                "Git",
+                "E2E Testing",
+                "Unit Tests",
+                "Grunt",
+                "Jira"
+              ]
+            },
+            {
+              "name": {
+                "en": "OTT HTML-based Testing Library",
+                "cs": "OTT testovací knihovna"
+              },
+              "from": "2014-06",
+              "to": "2024-03",
+              "description": {
+                "en": "Engineered and implemented a JavaScript library for end-to-end testing across HTML-based OTT platforms. Used advanced browser communication patterns and designed an HTTP storage fallback for constrained devices without standard storage APIs.",
+                "cs": "Navrhl a implementoval jsem JavaScriptovou knihovnu pro E2E testování napříč OTT platformami. Využíval jsem WebSockets, PostMessages a inovoval HTTP Storage pro zařízení bez standardních API."
+              },
+              "technologies": [
+                "JavaScript",
+                "Socket.io",
+                "WebSockets",
+                "WebRTC",
+                "REST API",
+                "PostMessage API",
+                "FileSystem/Storage API",
+                "Samsung SmartTv",
+                "LG Smart Tv",
+                "Playstation 4/5",
+                "Xbox One",
+                "E2E Testing",
+                "Unit Tests",
+                "Webpack",
+                "Jira",
+                "Git"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Javascript Developer",
-      "company": "mineus)(, s.r.o.",
-      "period": "2012 - 2014",
-      "description": "Developed modern applications leveraging HTML5 APIs, JavaScript, and CSS3 for major clients including PCWorld, IDG, Maxdome, ProSiebenSat.1, SwissTxt, and Tagesspiegel. During my tenure, key HbbTV applications underwent several major refactorings, involving the adoption of newer libraries and a transformation of the overall application architecture. Version control was managed using GIT, with design work performed in Photoshop.",
-      "projects": [
-        { "name": "Touch-based device application", "description": "Built a responsive, cross-platform HTML WebView application optimized for touch-based devices, including Android and iOS tablets and phones." },
-        { "name": "HbbTv Application", "description": "Created HbbTV applications for leading broadcasters (ProSieben, Kabel1, Sat.1, SwissTxt) featuring EPG, news feeds, and Video-on-Demand galleries for both broadcast and broadband delivery." },
-        { "name": "Maxdome", "description": "Contributed to the development of the Maxdome mobile Video-on-Demand (VoD) application for smartphones and tablets." },
-        { "name": "Pong Game", "description": "Developed a real-time multiplayer Pong game using Socket.io, designed for Smart TV platforms and controlled via standard TV remotes." },
-        { "name": "Network Analysis", "description": "Engaged in network analysis and network communication using Wireshark." }
+      "name": "mineus)(, s.r.o.",
+      "roles": [
+        {
+          "title": "JavaScript Developer",
+          "description": {
+            "en": "Developed modern applications using HTML5 APIs, JavaScript, and CSS3 for clients including PCWorld, IDG, Maxdome, ProSiebenSat.1, SwissTXT, and Tagesspiegel. Major HbbTV applications underwent several architectural refactorings during this period. Applied Wireshark for network and communication debugging. Version control with Git, design work with Photoshop.",
+            "cs": "Vyvíjel jsem moderní aplikace s využitím HTML5 API, JavaScriptu a CSS3 pro klienty jako PCWorld, IDG, Maxdome, ProSiebenSat.1, SwissTxt a Tagesspiegel. Aplikoval jsem Wireshark pro analýzu sítě. Správa verzí přes GIT, grafické práce v Photoshopu."
+          },
+          "projects": [
+            {
+              "name": "SwissTXT HbbTV",
+              "from": "2014-02",
+              "to": "2019-06",
+              "description": {
+                "en": "Continued development of the SwissTXT application for the HbbTV platform. The application went through major refactoring and architectural changes to adopt React and Redux for interactive broadcast experiences.",
+                "cs": "Pokračoval jsem ve vývoji aplikace SwissTxt pro HbbTV. Aplikace prošla refaktoringem při přechodu na React a Redux pro interaktivní broadcast zážitky."
+              },
+              "technologies": [
+                "React",
+                "Redux",
+                "JavaScript",
+                "TypeScript",
+                "HbbTV",
+                "CSS3",
+                "xHTML",
+                "Unit Tests",
+                "Webpack",
+                "Jira",
+                "Git"
+              ]
+            },
+            {
+              "name": "ePaper",
+              "from": "2013-04",
+              "to": "2014-06",
+              "description": {
+                "en": "Built HTML WebView ePaper applications for touch-based devices (Android and iOS tablets and phones) for clients Tagesspiegel, PCWelt, and MacWelt.",
+                "cs": "HTML WebView ePaper aplikace pro dotyková zařízení (Android a iOS tablety a telefony) pro klienty Tagesspiegel, PCWelt a MacWelt."
+              },
+              "technologies": [
+                "JavaScript",
+                "xHTML",
+                "CSS3",
+                "Grunt",
+                "Jira",
+                "Git"
+              ]
+            },
+            {
+              "name": {
+                "en": "HbbTV Application",
+                "cs": "HbbTv Aplikace"
+              },
+              "from": "2013-02",
+              "to": "2014-08",
+              "description": {
+                "en": "Created HbbTV applications for major broadcasters featuring EPG, news feeds, and video-on-demand galleries.",
+                "cs": "HbbTV aplikace pro přední vysílací společnosti (ProSieben, Kabel1, Sat.1) s EPG, zpravodajstvím a VoD galeriemi."
+              },
+              "technologies": [
+                "JavaScript",
+                "xHTML",
+                "SmartTv",
+                "HbbTV",
+                "REST API",
+                "Git",
+                "GitLab",
+                "Less",
+                "Grunt"
+              ]
+            },
+            {
+              "name": "Maxdome mobile VoD",
+              "from": "2012-10",
+              "to": "2013-06",
+              "description": {
+                "en": "Contributed to the development of the Maxdome mobile video-on-demand application for smartphones and tablets.",
+                "cs": "Mobilní Video-on-Demand aplikace Maxdome pro chytré telefony a tablety."
+              },
+              "technologies": [
+                "JavaScript",
+                "REST API",
+                "Git",
+                "GitLab",
+                "HTML5",
+                "CSS3",
+                "Less",
+                "Grunt"
+              ]
+            },
+            {
+              "name": {
+                "en": "Pong Game - Showcase demo for TVs",
+                "cs": "Hra Pong - Ukázka pro Tv"
+              },
+              "from": "2013-06",
+              "to": "2013-10",
+              "description": {
+                "en": "Developed a real-time multiplayer Pong game using Socket.io for Smart TV platforms with remote control input.",
+                "cs": "Multiplayerová hra Pong v reálném čase pomocí Socket.io pro Smart TV platformy ovládané dálkovým ovladačem."
+              },
+              "technologies": [
+                "JavaScript",
+                "Socket.io",
+                "HTML5",
+                "CSS3",
+                "Git",
+                "GitLab",
+                "Nginx",
+                "VirtualBox",
+                "Less",
+                "Node.js"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Web Developer",
-      "company": "Aaron Group, s.r.o.",
-      "period": "2011 - 2012",
-      "description": "Proactively identified and resolved a major bottleneck in the development workflow using SVN and Eclipse. Refactored a legacy XML/XSLT build process, reducing compilation time from 5 minutes to just 10 seconds per change, significantly boosting team productivity.",
-      "projects": [
-        { "name": "CMS overhaul", "description": "Responsible for the maintenance and enhancement of web applications and a proprietary internal CMS for enterprise clients like Caterpillar and Czech Airlines." },
-        { "name": "YUI and RightNow CMS", "description": "Developed and maintained the customer care portal for Vodafone Czech Republic (pece.vodafone.cz), utilizing the Yahoo! User Interface (YUI) Library and Oracle RightNow CX Cloud Service." },
-        { "name": "Booking system", "description": "Spearheaded the overhaul of the main flight booking engine, a critical product used by major travel agencies and airlines including czechairlines.cz, letuska.cz, and cedok.cz." }
+      "name": "Aaron Group, s.r.o.",
+      "roles": [
+        {
+          "title": "Web Developer",
+          "description": {
+            "en": "Proactively identified and resolved a major development workflow bottleneck using SVN and Eclipse. Refactored a legacy XML/XSLT build process and reduced compilation time from five minutes to ten seconds per change.",
+            "cs": "Proaktivně jsem identifikoval a vyřešil hlavní problém ve vývojovém workflow. Refaktoroval jsem zastaralý proces sestavení XML/XSLT a zkrátil dobu kompilace z 5 minut na 10 sekund na změnu."
+          },
+          "projects": [
+            {
+              "name": {
+                "en": "Corporate web management",
+                "cs": "Správa firemních webů"
+              },
+              "from": "2011-02",
+              "to": "2012-08",
+              "description": {
+                "en": "Managed and built websites driven by a proprietary internal CMS for enterprise clients including aarongroup.com, cat.com, csa.cz, and altron.cz.",
+                "cs": "Správa a tvorba webových prezentací ovládaných proprietárním interním CMS pro korporátní klienty jako aarongroup.com, cat.com, csa.cz a altron.cz."
+              },
+              "technologies": [
+                "JavaScript",
+                "xHTML",
+                "CSS3",
+                "XML",
+                "XSLT",
+                "jQuery"
+              ]
+            },
+            {
+              "name": {
+                "en": "Vodafone customer care portal",
+                "cs": "Zákaznický portál Vodafone"
+              },
+              "from": "2011-09",
+              "to": "2012-09",
+              "description": {
+                "en": "Developed and maintained the customer care portal for Vodafone Czech Republic using the Yahoo! User Interface library and Oracle RightNow CX.",
+                "cs": "Vývoj a údržba zákaznického portálu pro Vodafone ČR (pece.vodafone.cz) s využitím YUI Library a Oracle RightNow CX."
+              },
+              "technologies": [
+                "YUI",
+                "JSON",
+                "REST API",
+                "JavaScript",
+                "HTML5",
+                "CSS3"
+              ]
+            },
+            {
+              "name": {
+                "en": "Booking system",
+                "cs": "Rezervační systém"
+              },
+              "from": "2011-02",
+              "to": "2012-08",
+              "description": {
+                "en": "Maintained and managed the main flight booking engine used by major travel agencies and airlines including czechairlines.cz, letuska.cz, and cedok.cz.",
+                "cs": "Údržba a správa hlavního rezervačního systému letenek pro cestovní kanceláře a aerolinky, včetně czechairlines.cz, letuska.cz a cedok.cz."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "XSLT",
+                "xHTML",
+                "XML",
+                "XHR",
+                "CSS3",
+                "Bugzilla",
+                "SVN",
+                "Varnish",
+                "Nginx",
+                "REST API",
+                "jQuery"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Web Developer",
-      "company": "Internet Info",
-      "period": "2007 - 2011",
-      "description": "Created and maintained web magazines such as root.cz, lupa.cz, vitalia.cz, podnikatel.cz, and mesec.cz, utilizing version control systems like HG and SVN, and Bugzilla for issue tracking.",
-      "projects": [
-        { "name": "Magazine Overhaul", "description": "Maintained and updated a portfolio of high-traffic online magazines using PHP 5, focusing on performance improvements through both PHP code optimization and MySQL query tuning." },
-        { "name": "MySQL Expertise", "description": "Completed an advanced MySQL course led by renowned Czech database expert Jakub Vrána." },
-        { "name": "Upgrade and Refactor", "description": "Led a complete architectural refactor of the magazine platform, migrating to an Object-Oriented Programming (OOP) model using PHP 5 and the Nette Framework." }
+      "name": "Internet Info",
+      "roles": [
+        {
+          "title": "Web Developer",
+          "description": {
+            "en": "Created and maintained web magazines such as root.cz, lupa.cz, vitalia.cz, podnikatel.cz, and mesec.cz using HG, SVN, and Bugzilla. Completed an advanced MySQL course led by Czech database expert Jakub Vrana.",
+            "cs": "Tvorba a správa webových magazínů root.cz, lupa.cz, vitalia.cz, podnikatel.cz a mesec.cz. Absolvoval jsem pokročilý kurz MySQL vedený Jakubem Vránou."
+          },
+          "projects": [
+            {
+              "name": {
+                "en": "Magazine portfolio maintenance",
+                "cs": "Údržba portfolia magazínů"
+              },
+              "from": "2007-09",
+              "to": "2008-09",
+              "description": {
+                "en": "Maintained and developed features across the core magazine portfolio: root.cz, lupa.cz, mesec.cz, and slunecnice.cz. Version control with HG and SVN, bug tracking with Bugzilla.",
+                "cs": "Údržba a rozvoj funkcionality klíčových magazínů: root.cz, lupa.cz, mesec.cz a slunecnice.cz. Správa verzí přes HG a SVN, sledování chyb v Bugzille."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "CSS3",
+                "HTML4",
+                "Bugzilla",
+                "HG mercurial",
+                "jQuery"
+              ]
+            },
+            {
+              "name": "bomba.cz",
+              "from": "2008-09",
+              "to": "2009-09",
+              "description": {
+                "en": "Built a video aggregator platform that collected and categorised video content from multiple sources for the Czech market.",
+                "cs": "Vývoj video agregátoru sbírajícího a kategorizujícího video obsah z různých zdrojů pro český trh."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "CSS3",
+                "HTML4",
+                "JavaScript",
+                "Bugzilla",
+                "HG",
+                "jQuery"
+              ]
+            },
+            {
+              "name": {
+                "en": "podnikatel.cz redesign",
+                "cs": "Redesign podnikatel.cz"
+              },
+              "from": "2009-09",
+              "to": "2010-03",
+              "description": {
+                "en": "Led the full visual and structural redesign of podnikatel.cz, the leading Czech business information portal.",
+                "cs": "Vedl jsem kompletní vizuální a strukturální redesign podnikatel.cz, předního českého portálu pro podnikatele."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "CSS3",
+                "HTML4",
+                "JavaScript",
+                "Bugzilla",
+                "HG",
+                "jQuery",
+                "Google Maps API"
+              ]
+            },
+            {
+              "name": "zdrojak.cz",
+              "from": "2010-03",
+              "to": "2010-06",
+              "description": {
+                "en": "Feature development and maintenance for zdrojak.cz, a developer-focused technology magazine.",
+                "cs": "Vývoj nových funkcí a údržba zdrojak.cz, magazínu zaměřeného na vývojáře."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "CSS3",
+                "HTML4",
+                "JavaScript",
+                "Bugzilla",
+                "SVN",
+                "jQuery"
+              ]
+            },
+            {
+              "name": {
+                "en": "Platform OOP refactor",
+                "cs": "Refaktoring platformy na OOP"
+              },
+              "from": "2010-03",
+              "to": "2011-01",
+              "description": {
+                "en": "Architected and led the migration of the shared magazine platform to an object-oriented PHP 5 model using the Nette Framework. Delivered significant MySQL performance improvements across the high-traffic portfolio. Completed an advanced MySQL course led by Czech database expert Jakub Vrana.",
+                "cs": "Navrhl a vedl jsem migraci sdílené platformy magazínů na OOP model v PHP 5 s Nette Frameworkem. Výrazné optimalizace MySQL výkonu napříč celým portfoliem. Absolvoval jsem pokročilý kurz MySQL vedený Jakubem Vránou."
+              },
+              "technologies": [
+                "PHP",
+                "MySQL",
+                "CSS3",
+                "HTML4",
+                "JavaScript",
+                "Bugzilla",
+                "SVN"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
-      "role": "Part-time Network Technician",
-      "company": "Kroknet",
-      "period": "2005 - 2007",
-      "description": "Responsible for installing and configuring network elements, measuring signal strength, and performing quality control for a new network buildout.",
-      "projects": [],
-      "hideOnPageOne": true
+      "name": "Kroknet",
+      "hideOnPageOne": true,
+      "roles": [
+        {
+          "title": {
+            "en": "Part-time Network Technician",
+            "cs": "Brigáda - síťový technik"
+          },
+          "description": {
+            "en": "Installed and configured network elements, measured signal strength, and performed quality control during a new network buildout.",
+            "cs": "Instalace síťových prvků při budování sítě, její konfigurace, měření signálu a kontrola kvality."
+          },
+          "projects": [
+            {
+              "name": {
+                "en": "WiFi network buildout",
+                "cs": "Budování WiFi sítě"
+              },
+              "from": "2005",
+              "to": "2007",
+              "description": {
+                "en": "Hands-on installation and measurement of WiFi infrastructure for residential internet service. Configured network elements, performed signal strength measurements, and ensured quality of coverage across the deployment area.",
+                "cs": "Praktická instalace a měření WiFi infrastruktury pro poskytování rezidenčního internetu. Konfigurace síťových prvků, měření síly signálu a zajišťování kvality pokrytí v celé oblasti nasazení."
+              },
+              "technologies": [
+                "Debian",
+                "Telnet",
+                "Networking"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "educations": [
     {
-      "degree": "IT Administrator",
-      "institution": "High School of Information Technologies",
-      "period": "09/2003 - 06/2007",
-      "description": "High school with graduation.",
+      "degree": {
+        "en": "IT Administrator",
+        "cs": "Správce informačních systémů"
+      },
+      "institution": {
+        "en": "High School of Information Technologies",
+        "cs": "Střední škola informačních technologií"
+      },
+      "from": "2003-09",
+      "to": "2007-06",
+      "description": {
+        "en": "High school with graduation.",
+        "cs": "Střední škola s maturitou."
+      },
       "projects": [
-        { "name": "Hardware and Network Architecture", "description": "Completed the first semester of the Cisco Networking Academy, gaining hands-on experience in network architecture, Telnet administration, and Debian Linux." },
-        { "name": "Programming", "description": "Acquired foundational programming skills in Turbo Pascal, Delphi, and PHP." },
-        { "name": "Designs", "description": "Developed proficiency in graphic design software, including Adobe Photoshop for raster graphics and CorelDraw for vector illustration." },
-        { "name": "MSOffice", "description": "Obtained a certificate of proficiency for the Microsoft Office suite, covering advanced use of Access, Excel, Word, and PowerPoint." }
+        {
+          "name": {
+            "en": "Hardware and Network Architecture",
+            "cs": "Architektura hardware a sítí"
+          },
+          "description": {
+            "en": "Completed the first semester of the Cisco Networking Academy with practical work in network architecture, Telnet administration, and Debian Linux.",
+            "cs": "Absolvoval jsem první semestr síťové akademie Cisco, kde jsem získal praktické zkušenosti s architekturou sítí, správou přes Telnet a s Linuxem (Debian)."
+          },
+          "technologies": [
+            "Debian",
+            "Telnet",
+            "Networking"
+          ]
+        },
+        {
+          "name": {
+            "en": "Programming",
+            "cs": "Programování"
+          },
+          "description": {
+            "en": "Acquired foundational programming skills in Turbo Pascal, Delphi, and PHP.",
+            "cs": "Osvojil jsem si základy programování v jazycích Turbo Pascal, Delphi a PHP."
+          },
+          "technologies": [
+            "PHP",
+            "Turbo Pascal",
+            "Delphi"
+          ]
+        },
+        {
+          "name": {
+            "en": "Designs",
+            "cs": "Design"
+          },
+          "description": {
+            "en": "Developed proficiency with graphic design software including Adobe Photoshop and CorelDraw.",
+            "cs": "Získal jsem dovednosti v práci s grafickými programy, včetně Adobe Photoshop pro rastrovou grafiku a CorelDraw pro vektorové ilustrace."
+          },
+          "technologies": [
+            "Adobe Photoshop",
+            "CorelDraw"
+          ]
+        },
+        {
+          "name": {
+            "en": "MSOffice",
+            "cs": "MS Office"
+          },
+          "description": {
+            "en": "Obtained a certificate of proficiency for Microsoft Office covering Access, Excel, Word, and PowerPoint.",
+            "cs": "Získal jsem certifikát pro pokročilé používání balíku Microsoft Office, zahrnující práci s aplikacemi Access, Excel, Word a PowerPoint."
+          },
+          "technologies": [
+            "MSOffice"
+          ]
+        }
       ]
     }
   ]

@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProfileSidebar.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Support column for expertise tags, selected work and contact conversion.</Subtitle>
+<Description>
+The sidebar serves the secondary scan path. It keeps supporting context visible while the user reads
+the main content and ends with direct contact information.
+</Description>
+
+## Responsibilities
+
+- Surface supporting keywords and selected work.
+- Keep contact information always nearby on wide layouts.
+- Complement, not compete with, the main narrative column.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

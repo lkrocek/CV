@@ -6,7 +6,9 @@
       { "name": "TypeScript" },
       { "name": "PHP" },
       { "name": "xHTML" },
+      { "name": "HTML5" },
       { "name": "CSS3" },
+      { "name": "Less" },
       { "name": "BrightScript" }
     ]
   },
@@ -22,13 +24,15 @@
     "children": [
       { "name": "React" },
       { "name": "Redux" },
+      { "name": "Angular" },
       { "name": "AngularJS:1.7" },
       { "name": "jQuery" },
       { "name": "YUI" },
       { "name": "Node.js" },
       { "name": "Express" },
       { "name": "Electron" },
-      { "name": "Storybook" }
+      { "name": "Storybook" },
+      { "name": "Socket.io" }
     ]
   },
   {
@@ -41,7 +45,7 @@
       { "name": "WebWorkers" },
       { "name": "Manifest" },
       { "name": "LocalStorage" },
-      { "name": "CSS3" }
+      { "name": "Tailwind CSS" }
     ]
   },
   {
@@ -55,34 +59,40 @@
     "name": "CI&CD",
     "children": [
       { "name": "Webpack" },
+      { "name": "Vite" },
       { "name": "Gulp" },
       { "name": "Grunt" },
+      { "name": "Jest" },
+      { "name": "Mocha" },
       { "name": "Apache" },
       { "name": "Nginx" },
       { "name": "Varnish" },
+      { "name": "TeamCity" },
       { "name": "GitHubActions" },
       { "name": "Pipelines" }
     ]
   },
   {
+    "name": "Platforms",
+    "children": [
+      { "name": "HbbTV" },
+      { "name": "Roku" },
+      { "name": "Networking" },
+      { "name": "Telnet" },
+      { "name": "Debian" },
+      { "name": "AI" }
+    ]
+  },
+  {
     "name": "Tools",
     "children": [
+      { "name": "Git" },
       { "name": "MS Windows" },
-      {
-        "name": "Linux",
-        "children": [
-          { "name": "Ubuntu" },
-          { "name": "Raspian" },
-          { "name": "Debian" }
-        ]
-      },
-      { "name": "VituralBox" },
+      { "name": "Linux" },
+      { "name": "VirtualBox" },
       { "name": "VSCode" },
       { "name": "WebStorm" },
-      { "name": "MSOffice" },
-      { "name": "Click" },
-      { "name": "DoubleClick" },
-      { "name": "RightClick" }
+      { "name": "MSOffice" }
     ]
   }
 ]

@@ -5,129 +5,128 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CV - Lukas Krocek</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Roboto', 'sans-serif'],
-            },
-            animation: {
-              'fade-in': 'fade-in 0.4s ease-out forwards',
-              'fly-in-closer': 'fly-in-closer 0.4s ease-out forwards',
-              'modal-overlay-in': 'fade-in 0.5s ease-out both',
-              'modal-overlay-out': 'fade-out 0.3s ease-in 0.9s forwards',
-              'modal-close-in': 'drop-in 0.3s ease-out 0.7s forwards',
-              'modal-window-in': 'drop-in 0.3s ease-out 1.2s forwards',
-              'modal-close-out': 'drop-out 0.5s ease-out forwards',
-              'modal-window-out': 'drop-out 0.4s ease-out 0.2s forwards',
-            },
-            keyframes: {
-              'fade-in': {
-                'from': { opacity: '0' },
-                'to': { opacity: '1' },
-              },
-              'fade-out': {
-                'from': { opacity: '1' },
-                'to': { opacity: '0' },
-              },
-              'fly-in-closer': {
-                '0%': { opacity: '0', transform: 'translateZ(0px) scale(0.9)' },
-                '100%': { opacity: '1', transform: 'translateZ(40px) scale(1)' },
-              },
-              'drop-in': {
-                'from': { opacity: '0', transform: 'translateY(-100px)' },
-                'to': { opacity: '1', transform: 'translateY(0)' },
-              },
-              'drop-out': {
-                'from': { opacity: '1', transform: 'translateY(0)' },
-                'to': { opacity: '0', transform: 'translateY(100px)' },
-              },
-            }
-          }
-        }
-      }
-    </script>
     <style>
-      /* Set base font size to ensure consistent rem calculations and match desired smaller size */
-      html {
-        font-size: 14px;
+      :root {
+        color-scheme: dark;
       }
 
-      @media print {
-        html, body {
-          overflow: visible !important;
-          height: auto !important;
-        }
-        /* Force browsers to print background colors and images, remove shadows, etc. */
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            box-shadow: none !important;
-        }
-        body {
-          margin: 0;
-          padding: 0;
-        }
-        .no-print {
-          display: none !important;
-        }
-        .print-page {
-          margin: 0 !important;
-          border: none !important;
-          box-shadow: none !important;
-          transform: scale(1) !important;
-          border-radius: 0 !important; /* Remove rounded corners for print */
-        }
-        /* Add page break after every page except the last one */
-        .print-page:not(:last-child) {
-            page-break-after: always;
-        }
-        .print-container {
-          padding: 0 !important;
-          overflow: visible !important;
-        }
-        /* Ensure code block is visible and wraps correctly in print */
-        pre {
-            overflow: visible !important;
-            white-space: pre-wrap !important;
-            word-break: break-all !important;
-        }
-        /* Override any overflow-hidden containers during print to show content, unless explicitly told not to */
-        [class*="overflow-hidden"]:not(.print-keep-overflow) {
-          overflow: visible !important;
-        }
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
       }
-      @page {
-        size: A4;
+
+      body {
         margin: 0;
+        overflow: hidden;
+        background: #050816;
       }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
+
+      #app-scroll {
+        height: 100vh;
+        overflow-y: auto;
+        scrollbar-gutter: stable;
       }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: radial-gradient(circle at top left, rgba(79,91,198,0.32), transparent 26%),
+                    radial-gradient(circle at 85% 18%, rgba(60,84,166,0.24), transparent 18%),
+                    linear-gradient(180deg, #050816 0%, #070c1b 36%, #050713 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        transition: opacity 0.6s ease;
+      }
+
+      #splash.splash-light {
+        background: radial-gradient(circle at top left, rgba(199,210,254,0.7), transparent 24%),
+                    radial-gradient(circle at 80% 18%, rgba(191,219,254,0.65), transparent 20%),
+                    linear-gradient(180deg, #f8fafc 0%, #eef2ff 34%, #e2e8f0 100%);
+      }
+
+      #splash.splash-light .splash-name {
+        color: #1e293b;
+      }
+
+      #splash.splash-light .splash-name span {
+        color: #4f46e5;
+      }
+
+      #splash.splash-light .splash-dot {
+        background: #4f46e5;
+      }
+
+      #splash.splash-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-name {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 700;
+        color: #e2e8f0;
+        letter-spacing: 0.01em;
+        opacity: 0;
+        animation: splash-fade-in 0.7s ease 0.1s forwards;
+      }
+
+      .splash-name span {
+        color: #8ea2ff;
+      }
+
+      .splash-dots {
+        display: flex;
+        gap: 8px;
+        opacity: 0;
+        animation: splash-fade-in 0.5s ease 0.5s forwards;
+      }
+
+      .splash-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #8ea2ff;
+        animation: splash-pulse 1.2s ease-in-out infinite;
+      }
+
+      .splash-dot:nth-child(2) { animation-delay: 0.2s; }
+      .splash-dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes splash-fade-in {
+        to { opacity: 1; }
+      }
+
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 0.3; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.2); }
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
-    "react": "https://esm.sh/react@19.2.0?dev",
-    "react-dom/client": "https://esm.sh/react-dom@19.2.0/client?dev",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/"
-  }
-}
-</script>
-</head>
-  <body class="bg-gray-50 font-sans">
-    <div id="root"></div>
+  </head>
+  <body>
+    <div id="app-scroll">
+      <div id="root"></div>
+    </div>
+    <div id="splash">
+      <div class="splash-name">Lukáš <span>Kroček</span></div>
+      <div class="splash-dots">
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+        <div class="splash-dot"></div>
+      </div>
+    </div>
+    <script>
+      try {
+        if (localStorage.getItem('cv-theme') === 'light') {
+          document.getElementById('splash').classList.add('splash-light');
+          document.body.style.background = '#f8fafc';
+        }
+      } catch (e) {}
+    </script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

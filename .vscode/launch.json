@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Storybook",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm.cmd run storybook",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "App Server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm.cmd run dev",
+      "cwd": "${workspaceFolder}",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "Build",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm.cmd run build:all",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Build Storybook",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm.cmd run build-storybook",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Server + Storybook",
+      "configurations": [
+        "App Server",
+        "Storybook"
+      ]
+    }
+  ]
+}

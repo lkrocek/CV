@@ -1,0 +1,23 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProfileTopBar.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Sticky navigation and global controls for the CV page.</Subtitle>
+<Description>
+This component exposes the global actions: section navigation, language switch, download action
+and theme toggle. It is intentionally dumb and delegates all behavior through callbacks.
+</Description>
+
+## Responsibilities
+
+- Present the primary navigation.
+- Keep global controls visually consistent in both themes.
+- Stay independent from routing or document export logic.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

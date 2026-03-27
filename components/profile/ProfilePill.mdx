@@ -1,0 +1,29 @@
+﻿import { Canvas, Meta, Story, Subtitle, Title, Description } from '@storybook/addon-docs/blocks';
+import * as Stories from './ProfilePill.stories';
+
+<Meta of={Stories} />
+
+<Title />
+<Subtitle>Reusable tag primitive for technologies, durations and compact labels.</Subtitle>
+<Description>
+This is a small but important visual primitive. It appears throughout the CV as the compact unit for
+technology names, metadata and quick categorization.
+</Description>
+
+## Responsibilities
+
+- Remain visually lightweight and repeatable.
+- Work in dark and light themes.
+- Support both neutral and accent emphasis.
+
+## Story strategy
+
+- Theme is controlled globally through the Storybook toolbar.
+- Separate stories are used only for semantic variants of the component.
+- The stories below cover default label usage, accent emphasis, long labels, and pill content with inline metadata.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>
+
+

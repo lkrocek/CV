@@ -1,126 +1,130 @@
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CVPreview } from './components/CVPreview';
-import type { CVData } from './types';
-import { sampleData, sampleDataCs } from './constants';
+import { useCvData } from './hooks/useCvData';
+import { useTechnologyInsights } from './hooks/useTechnologyInsights';
+import type { Language } from './types';
 
-type Language = 'en' | 'cs';
+const SPLASH_MIN_MS = 1800;
+
+const buildPdfFileName = (name: string, language: Language) => {
+  const base = name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  return `${base || 'cv'}-${language}.pdf`;
+};
+
+const dismissSplash = () => {
+  const splash = document.getElementById('splash');
+  if (!splash) return;
+  splash.classList.add('splash-hidden');
+  splash.addEventListener('transitionend', () => {
+    splash.remove();
+    document.body.classList.add('splash-done');
+    globalThis.dispatchEvent(new CustomEvent('splashDismissed'));
+    const hash = globalThis.location.hash.slice(1);
+    if (!hash) return;
+    document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, { once: true });
+};
+
+const getInitialSettings = (): { lang: Language; dark: boolean } => {
+  try {
+    const lang: Language = localStorage.getItem('cv-lang') === 'cs' ? 'cs' : 'en';
+    const dark = localStorage.getItem('cv-theme') !== 'light';
+    return { lang, dark };
+  } catch {
+    return { lang: 'en', dark: true };
+  }
+};
 
 const App: React.FC = () => {
-  const [language, setLanguage] = useState<Language>('en');
-  const [allCvData, setAllCvData] = useState({
-    en: sampleData,
-    cs: sampleDataCs,
-  });
+  const { lang: initialLang, dark: initialDark } = getInitialSettings();
+  const [language, setLanguage] = useState<Language>(initialLang);
+  const [isDarkMode, setIsDarkMode] = useState(initialDark);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
+  const { currentCvData, updateProjectField, updateSectionField } = useCvData(language);
+  const { insights, ready: workerReady } = useTechnologyInsights(currentCvData);
+  const minTimeReached = useRef(false);
+  const appReady = useRef(false);
+  const workerReadyRef = useRef(false);
 
   useEffect(() => {
-    // Fetch English data
-    fetch('/skills.json')
-      .then(response => response.ok ? response.json() : [])
-      .then(skillsData => {
-        setAllCvData(prevData => ({
-          ...prevData,
-          en: { ...prevData.en, skills: skillsData },
-        }));
-      })
-      .catch(error => console.error('Error fetching English skills:', error));
+    try {
+      localStorage.setItem('cv-lang', language);
+      localStorage.setItem('cv-theme', isDarkMode ? 'dark' : 'light');
+    } catch { /* ignore */ }
+  }, [language, isDarkMode]);
 
-    fetch('/history.json')
-      .then(response => response.ok ? response.json() : [])
-      .then(historyData => {
-        setAllCvData(prevData => ({
-          ...prevData,
-          en: { 
-            ...prevData.en, 
-            experiences: historyData.experiences || [],
-            educations: historyData.educations || [],
-          },
-        }));
-      })
-      .catch(error => console.error('Error fetching English history:', error));
-    
-    // Fetch language-independent assets like the profile photo from a JSON file
-    fetch('/photo.json')
-      .then(response => response.ok ? response.json() : { photo: '' })
-      .then(data => {
-        const photo = data.photo;
-        if (photo) {
-          setAllCvData(prevData => ({
-            en: { ...prevData.en, personalInfo: { ...prevData.en.personalInfo, profilePhoto: photo } },
-            cs: { ...prevData.cs, personalInfo: { ...prevData.cs.personalInfo, profilePhoto: photo } },
-          }));
-        }
-      })
-      .catch(error => console.error('Error fetching profile photo JSON:', error));
+  const tryDismiss = () => {
+    if (minTimeReached.current && appReady.current && workerReadyRef.current) dismissSplash();
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      minTimeReached.current = true;
+      tryDismiss();
+    }, SPLASH_MIN_MS);
+    return () => clearTimeout(timer);
   }, []);
 
-  const handleCvDataChange = useCallback(<K extends keyof CVData>(
-    section: K,
-    index: number | null,
-    field: string,
-    value: string
-  ) => {
-    setAllCvData(prevData => {
-      const langData = prevData[language];
-      const newLangData = { ...langData };
-      if (index !== null && Array.isArray(newLangData[section])) {
-        const sectionArray = [...(newLangData[section] as any[])];
-        sectionArray[index] = { ...sectionArray[index], [field]: value };
-        return { ...prevData, [language]: { ...newLangData, [section]: sectionArray } };
-      } else if (typeof newLangData[section] === 'object' && newLangData[section] !== null) {
-         return {
-          ...prevData,
-          [language]: {
-            ...newLangData,
-            [section]: { ...(newLangData[section] as object), [field]: value }
-          }
-        };
-      }
-       else {
-        return { ...prevData, [language]: { ...newLangData, [field]: value } };
-      }
-    });
-  }, [language]);
+  useEffect(() => {
+    appReady.current = true;
+    tryDismiss();
+  }, []);
 
-  const handleSimpleChange = useCallback((field: keyof CVData, value: string | string[]) => {
-    setAllCvData(prev => ({
-        ...prev,
-        [language]: {...prev[language], [field]: value}
-    }));
-  }, [language]);
+  useEffect(() => {
+    if (workerReady) {
+      workerReadyRef.current = true;
+      tryDismiss();
+    }
+  }, [workerReady]);
 
-  const handleProjectChange = useCallback((itemType: 'experiences' | 'educations', itemIndex: number, projIndex: number, field: string, value: string) => {
-      setAllCvData(prev => {
-          const langData = prev[language];
-          const newItems = [...langData[itemType]];
-          const item = { ...newItems[itemIndex] };
-          const newProjects = [...(item.projects || [])];
-          newProjects[projIndex] = { ...newProjects[projIndex], [field]: value };
-          item.projects = newProjects;
-          newItems[itemIndex] = item;
-          return { ...prev, [language]: { ...langData, [itemType]: newItems }};
-      });
-  }, [language]);
-  
-  const currentCvData = allCvData[language];
+  const handleDownloadPdf = async () => {
+    if (isDownloadingPdf) return;
+
+    setIsDownloadingPdf(true);
+    try {
+      const [{ pdf }, { CvPdfDocument }] = await Promise.all([
+        import('@react-pdf/renderer'),
+        import('./components/pdf/CvPdfDocument'),
+      ]);
+
+      const blob = await pdf(
+        <CvPdfDocument data={currentCvData} language={language} />
+      ).toBlob();
+
+      const href = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = href;
+      anchor.download = buildPdfFileName(currentCvData.personalInfo.name, language);
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      globalThis.setTimeout(() => URL.revokeObjectURL(href), 1000);
+    } finally {
+      setIsDownloadingPdf(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <header className="bg-white shadow-md no-print w-full z-10 hidden">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-                <h1 className="text-2xl font-bold text-gray-800">WYSIWYG CV Builder</h1>
-            </div>
-        </div>
-      </header>
-      <main className="flex-grow w-full bg-gray-100 overflow-y-auto print-container">
-        <CVPreview 
+    <div className="min-h-screen">
+      <main className="min-h-screen w-full">
+        <CVPreview
           data={currentCvData}
+          insights={insights}
+          isDarkMode={isDarkMode}
+          isDownloadingPdf={isDownloadingPdf}
           language={language}
+          onDownloadPdf={handleDownloadPdf}
           onLanguageChange={setLanguage}
-          onChange={handleCvDataChange}
-          onSimpleChange={handleSimpleChange}
-          onProjectChange={handleProjectChange}
+          onThemeToggle={() => setIsDarkMode((prev) => !prev)}
+          onChange={updateSectionField}
+          onProjectChange={updateProjectField}
         />
       </main>
     </div>

@@ -6,17 +6,38 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "storybook": "storybook dev -p 6006 --ci",
+    "build-storybook": "storybook build --output-dir public/storybook",
+    "build:all": "npm run build-storybook && npm run build"
   },
   "dependencies": {
-    "@google/genai": "^1.28.0",
+    "@react-pdf/renderer": "^4.3.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@fontsource/manrope": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.10",
+    "@storybook/addon-a11y": "^10.2.17",
+    "@storybook/addon-docs": "^10.2.17",
+    "@storybook/addon-onboarding": "^10.2.17",
+    "@storybook/addon-vitest": "^10.2.17",
+    "@storybook/react-vite": "^10.2.17",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18",
+    "playwright": "^1.58.2",
+    "storybook": "^10.2.17",
+    "tailwindcss": "^4.2.2",
     "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vitest": "^4.0.18"
   }
 }
