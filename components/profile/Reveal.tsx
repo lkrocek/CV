@@ -17,8 +17,26 @@ export const Reveal: React.FC<RevealProps> = ({
 }) => {
   const ref = React.useRef<Element | null>(null);
   const [isVisible, setIsVisible] = React.useState(false);
+  const splashReadyRef = React.useRef(
+    typeof document !== 'undefined' && document.body.classList.contains('splash-done'),
+  );
+  const pendingRef = React.useRef(false);
+
   const setRef = React.useCallback((node: Element | null) => {
     ref.current = node;
+  }, []);
+
+  React.useEffect(() => {
+    if (splashReadyRef.current) return;
+
+    const handler = () => {
+      splashReadyRef.current = true;
+      if (pendingRef.current) {
+        setIsVisible(true);
+      }
+    };
+    globalThis.addEventListener('splashDismissed', handler, { once: true });
+    return () => globalThis.removeEventListener('splashDismissed', handler);
   }, []);
 
   React.useEffect(() => {
@@ -28,8 +46,12 @@ export const Reveal: React.FC<RevealProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
-        setIsVisible(true);
         observer.disconnect();
+        if (splashReadyRef.current) {
+          setIsVisible(true);
+        } else {
+          pendingRef.current = true;
+        }
       },
       { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
     );

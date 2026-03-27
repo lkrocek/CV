@@ -21,6 +21,22 @@ export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> =
   onViewModeChange,
 }) => {
   const copy = profileCopy[language];
+  const [isBlinking, setIsBlinking] = React.useState(false);
+
+  React.useEffect(() => {
+    const startBlink = () => {
+      setIsBlinking(true);
+      setTimeout(() => setIsBlinking(false), 2500);
+    };
+
+    if (document.body.classList.contains('splash-done')) {
+      startBlink();
+      return;
+    }
+
+    globalThis.addEventListener('splashDismissed', startBlink, { once: true });
+    return () => globalThis.removeEventListener('splashDismissed', startBlink);
+  }, []);
   const isChronologicalView = viewMode === 'timeline' || viewMode === 'companies';
   const sortLabel = isChronologicalView
     ? (sortDirection === 'desc' ? copy.sortNewestFirst : copy.sortOldestFirst)
@@ -43,7 +59,10 @@ export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> =
       </div>
 
       <div className="flex w-full flex-1 flex-wrap items-center justify-between gap-2 self-start">
-        <div className={`flex rounded-xl p-1 text-sm font-medium ${isDarkMode ? 'bg-white/5' : 'bg-slate-100'}`}>
+        <div
+          className={`flex rounded-xl p-1 text-sm font-medium ${isDarkMode ? 'bg-white/5' : 'bg-slate-100'} ${isBlinking ? 'tabs-blink' : ''}`}
+          style={{ boxShadow: '0 0 8px 2px rgba(99, 102, 241, 0.22)' }}
+        >
           {tabs.map(({ mode, label }) => (
             <button
               key={mode}

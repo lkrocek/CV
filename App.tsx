@@ -24,6 +24,8 @@ const dismissSplash = () => {
   splash.classList.add('splash-hidden');
   splash.addEventListener('transitionend', () => {
     splash.remove();
+    document.body.classList.add('splash-done');
+    globalThis.dispatchEvent(new CustomEvent('splashDismissed'));
     const hash = globalThis.location.hash.slice(1);
     if (!hash) return;
     document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
