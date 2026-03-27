@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Skill(update-config:*)",
+      "Bash(GIT_SEQUENCE_EDITOR=:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)"
+    ]
+  }
+}
