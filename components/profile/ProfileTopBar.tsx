@@ -70,13 +70,40 @@ export const ProfileTopBar: React.FC<ProfileTopBarProps> = ({
           <span className={`pb-3 select-none text-lg ${isDarkMode ? 'text-slate-700' : 'text-slate-300'}`}>|</span>
 
           {/* Experience — full CV view */}
-          <button
-            onClick={() => onViewChange('experience')}
+          <a
+            href="#experience"
+            onClick={(e) => { e.preventDefault(); history.replaceState(null, '', '#experience'); onViewChange('experience'); }}
             className={`${baseLinkCls} cursor-pointer ${activeExp ? activeCls : idleCls}`}
           >
             {copy.experience}
             {activeExp && underline}
-          </button>
+          </a>
+
+          <span className={`pb-3 select-none text-lg ${isDarkMode ? 'text-slate-700' : 'text-slate-300'}`}>|</span>
+
+          {/* External links */}
+          <a
+            href="https://github.com/lkrocek/CV"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex cursor-pointer items-center gap-1 pb-3 text-sm transition ${isDarkMode ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'}`}
+          >
+            GitHub
+            <svg viewBox="0 0 10 10" fill="none" className="h-3 w-3 flex-shrink-0" aria-hidden="true">
+              <path d="M1.5 8.5l7-7M8.5 8.5V2.5h-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+          <a
+            href="/storybook/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex cursor-pointer items-center gap-1 pb-3 text-sm transition ${isDarkMode ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'}`}
+          >
+            Storybook
+            <svg viewBox="0 0 10 10" fill="none" className="h-3 w-3 flex-shrink-0" aria-hidden="true">
+              <path d="M1.5 8.5l7-7M8.5 8.5V2.5h-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
 
         </nav>
         <div className="ml-auto flex items-center gap-3">

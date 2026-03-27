@@ -14,7 +14,6 @@ type Props = {
   language: Language;
   onSelectEntry: (key: string) => void;
   onClearSelection: () => void;
-  selectedEntryKey: string | null;
 };
 
 export const TechnologyExplorerDetail: React.FC<Props> = ({
@@ -23,7 +22,6 @@ export const TechnologyExplorerDetail: React.FC<Props> = ({
   isDarkMode,
   language,
   onClearSelection,
-  selectedEntryKey,
   onSelectEntry,
 }) => {
   const copy = profileCopy[language];
@@ -43,7 +41,7 @@ export const TechnologyExplorerDetail: React.FC<Props> = ({
   }, [selectedEntry]);
 
   return (
-    <div className="xl:sticky xl:top-8 xl:self-start">
+    <div>
       <div
         className={`rounded-[20px] border p-5 ${
           isDarkMode ? 'border-cyan-400/12 bg-[rgba(8,17,42,0.82)]' : 'border-cyan-500/18 bg-[rgba(240,249,255,0.92)]'
@@ -98,8 +96,8 @@ export const TechnologyExplorerDetail: React.FC<Props> = ({
               <button
                 key={key}
                 onClick={() => onSelectEntry(key)}
-                className={`w-full rounded-2xl border p-4 text-left cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] ${
-                  isDarkMode ? 'border-[rgba(255,255,255,0.06)] bg-white/[0.03] hover:border-indigo-300/18 hover:bg-white/[0.05]' : 'border-slate-200/60 bg-white/70 hover:border-indigo-300/50 hover:bg-white/90'
+                className={`w-full rounded-2xl border p-4 text-left cursor-pointer transition-[border-color,background-color] duration-300 ${
+                  isDarkMode ? 'border-[rgba(255,255,255,0.06)] bg-white/[0.03] hover:border-indigo-400/40 hover:bg-white/[0.05]' : 'border-slate-200/60 bg-white/70 hover:border-indigo-400/55 hover:bg-white/90'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -139,7 +137,7 @@ export const TechnologyExplorerDetail: React.FC<Props> = ({
             </div>
           </div>
           {selectedEntry.projectDetails.map((project) => (
-            <div key={`${selectedEntry.company}-${project.name}`} className={`rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-0.5 ${isDarkMode ? 'border-emerald-400/10 bg-[rgba(10,18,34,0.9)] hover:border-emerald-300/16' : 'border-emerald-300/40 bg-[rgba(248,250,252,0.92)] hover:border-emerald-400/50'}`}>
+            <div key={`${selectedEntry.company}-${project.name}`} className={`rounded-2xl border p-4 transition-[border-color] duration-300 ${isDarkMode ? 'border-emerald-400/10 bg-[rgba(10,18,34,0.9)] hover:border-emerald-400/35' : 'border-emerald-300/40 bg-[rgba(248,250,252,0.92)] hover:border-emerald-500/60'}`}>
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <div className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{project.name}</div>

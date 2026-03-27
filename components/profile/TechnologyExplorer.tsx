@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import type { Language } from '../../types';
-import { formatDuration, profileCopy, type TechnologyInsight } from './profileContent';
+import { type TechnologyInsight } from './profileContent';
 import { TechnologyExplorerDetail } from './TechnologyExplorerDetail';
 import { TechnologyExplorerHeader } from './TechnologyExplorerHeader';
 import { TechnologyExplorerChart } from './TechnologyExplorerChart';
-import { TechnologyExplorerEntryCard } from './TechnologyExplorerEntryCard';
 import {
   TechnologyExplorerCompanyPanel,
   type CompanyDetail,
@@ -18,6 +17,7 @@ type TechnologyExplorerProps = {
   activeTechnology: string | null;
   insights: TechnologyInsight[];
   isDarkMode: boolean;
+  isActive: boolean;
   language: Language;
   onSelectTechnology: (technology: string) => void;
 };
@@ -26,6 +26,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
   activeTechnology,
   insights,
   isDarkMode,
+  isActive,
   language,
   onSelectTechnology,
 }) => {
@@ -40,10 +41,9 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     setSelectedCompany,
   } = useTechnologyExplorerState({
     activeTechnology,
+    isActive,
     onSelectTechnology,
   });
-
-  const copy = profileCopy[language];
 
   const sortedInsights = useMemo(() => {
     const base = [...insights].sort((left, right) => right.totalMonths - left.totalMonths);
@@ -207,6 +207,19 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     return insights[0] ?? null;
   }, [activeTechnology, insights, sortedInsights, timelineData, viewMode]);
 
+  const chartColumnRef = React.useRef<HTMLDivElement>(null);
+  const [chartHeight, setChartHeight] = React.useState<number | undefined>(undefined);
+
+  React.useEffect(() => {
+    const el = chartColumnRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      if (entry) setChartHeight(entry.contentRect.height);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   const maxMonths = insights.reduce((max, insight) => Math.max(max, insight.totalMonths), 1);
   const selectedEntry = selectedInsight?.entries.find((entry, index) => `${selectedInsight.name}-${entry.company}-${index}` === selectedEntryKey) ?? null;
 
@@ -226,7 +239,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
       }`}
     >
       <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="min-w-0">
+        <div className="min-w-0" ref={chartColumnRef}>
           <TechnologyExplorerHeader
             isDarkMode={isDarkMode}
             language={language}
@@ -252,97 +265,31 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
         </div>
 
         {viewMode === 'companies' && selectedCompanyDetail && (
-          <TechnologyExplorerCompanyPanel
-            companyDetail={selectedCompanyDetail}
-            isDarkMode={isDarkMode}
-            language={language}
-          />
+          <div
+            className="xl:sticky xl:top-28 xl:self-start xl:overflow-y-auto xl:overflow-x-hidden"
+            style={{ maxHeight: chartHeight ? `${chartHeight}px` : undefined, colorScheme: isDarkMode ? 'dark' : 'light' }}
+          >
+            <TechnologyExplorerCompanyPanel
+              companyDetail={selectedCompanyDetail}
+              isDarkMode={isDarkMode}
+              language={language}
+            />
+          </div>
         )}
 
         {selectedInsight && viewMode !== 'companies' && (
-          <div className="xl:sticky xl:top-28 xl:self-start">
+          <div
+            className="xl:sticky xl:top-28 xl:self-start xl:overflow-y-auto xl:overflow-x-hidden"
+            style={{ maxHeight: chartHeight ? `${chartHeight}px` : undefined, colorScheme: isDarkMode ? 'dark' : 'light' }}
+          >
             <TechnologyExplorerDetail
               selectedInsight={selectedInsight}
               selectedEntry={selectedEntry}
               isDarkMode={isDarkMode}
               language={language}
-              selectedEntryKey={selectedEntryKey}
               onClearSelection={() => setSelectedEntryKey(null)}
               onSelectEntry={setSelectedEntryKey}
             />
-
-            {!selectedEntry && (
-              <div className="mt-3 space-y-2">
-                {selectedInsight.entries.map((entry, index) => {
-                  const key = `${selectedInsight.name}-${entry.company}-${index}`;
-                  return (
-                    <TechnologyExplorerEntryCard
-                      key={key}
-                      company={entry.company}
-                      role={entry.role}
-                      period={entry.period}
-                      months={entry.months}
-                      summary={entry.summary}
-                      projects={entry.projects}
-                      isDarkMode={isDarkMode}
-                      language={language}
-                      onClick={() => setSelectedEntryKey(key)}
-                    />
-                  );
-                })}
-              </div>
-            )}
-
-            {selectedEntry && (
-              <div className="mt-3 space-y-2">
-                <TechnologyExplorerEntryCard
-                  company={selectedEntry.company}
-                  role={selectedEntry.role}
-                  period={selectedEntry.period}
-                  months={selectedEntry.months}
-                  summary={selectedEntry.summary}
-                  projects={[]}
-                  isDarkMode={isDarkMode}
-                  language={language}
-                  selected
-                />
-
-                <div className="space-y-2 pt-1">
-                  {selectedEntry.projectDetails.map((project) => (
-                    <div
-                      key={`${selectedEntry.company}-${project.name}`}
-                      className={`rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-0.5 ${
-                        isDarkMode ? 'border-emerald-400/10 bg-[rgba(10,18,34,0.9)] hover:border-emerald-300/16' : 'border-emerald-300/40 bg-[rgba(248,250,252,0.92)] hover:border-emerald-400/50'
-                      }`}
-                    >
-                      <div className="min-w-0">
-                        <div className={`font-semibold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{project.name}</div>
-                        <div className={`mt-0.5 text-xs uppercase tracking-[0.18em] ${isDarkMode ? 'text-slate-500' : 'text-slate-400'}`}>
-                          {project.from} {project.to ? `- ${project.to}` : `- ${copy.present}`}
-                        </div>
-                      </div>
-                      <p className={`mt-3 text-sm leading-6 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-                        {project.description}
-                      </p>
-                      {project.technologies?.length ? (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {project.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              className={`rounded-full border px-3 py-1.5 text-sm ${
-                                isDarkMode ? 'border-[rgba(255,255,255,0.12)] text-slate-200' : 'border-slate-200 text-slate-700'
-                              }`}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>

@@ -41,7 +41,9 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
 
     return new URLSearchParams(globalThis.location.hash.slice(queryStart + 1)).get('tech');
   });
-  const [activeView, setActiveView] = React.useState<'about' | 'experience'>('about');
+  const [activeView, setActiveView] = React.useState<'about' | 'experience'>(() =>
+    globalThis.location?.hash === '#experience' ? 'experience' : 'about',
+  );
   const highlights = getProfileHighlights(data);
   const heroPills = getHeroPills(data, language);
   const expertise = flattenSkills(data.skills).slice(0, 4);
@@ -78,28 +80,28 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
         />
 
         <main className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-16 pt-10 lg:px-10 lg:pb-24 lg:pt-14">
+          <span id="experience" className="scroll-mt-28 block h-0" aria-hidden="true" />
           <ProfileHero data={data} highlights={highlights} isDarkMode={isDarkMode} pills={heroPills} />
 
-          {activeView === 'about' && (
-            <>
-              <QuickOverview isDarkMode={isDarkMode} items={overviewItems} />
-              <Reveal delayMs={40}>
-                <TechnologyExplorer
-                  activeTechnology={activeTechnology}
-                  insights={insights}
-                  isDarkMode={isDarkMode}
-                  language={language}
-                  onSelectTechnology={setActiveTechnology}
-                />
-              </Reveal>
-              <ProfileSidebar
-                data={data}
-                expertise={expertise.length ? expertise : heroPills}
+          <div className={activeView !== 'about' ? 'hidden' : 'contents'}>
+            <QuickOverview isDarkMode={isDarkMode} items={overviewItems} />
+            <Reveal delayMs={40}>
+              <TechnologyExplorer
+                activeTechnology={activeTechnology}
+                insights={insights}
                 isDarkMode={isDarkMode}
+                isActive={activeView === 'about'}
                 language={language}
+                onSelectTechnology={setActiveTechnology}
               />
-            </>
-          )}
+            </Reveal>
+            <ProfileSidebar
+              data={data}
+              expertise={expertise.length ? expertise : heroPills}
+              isDarkMode={isDarkMode}
+              language={language}
+            />
+          </div>
 
           {activeView === 'experience' && (
             <Reveal>

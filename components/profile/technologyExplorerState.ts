@@ -55,11 +55,13 @@ export const buildExplorerHash = (state: ExplorerHashState): string => {
 
 type UseTechnologyExplorerStateArgs = {
   activeTechnology: string | null;
+  isActive: boolean;
   onSelectTechnology: (technology: string) => void;
 };
 
 export const useTechnologyExplorerState = ({
   activeTechnology,
+  isActive,
   onSelectTechnology,
 }: UseTechnologyExplorerStateArgs) => {
   const initialHashState = React.useMemo(
@@ -118,6 +120,8 @@ export const useTechnologyExplorerState = ({
   }, [viewMode]);
 
   React.useEffect(() => {
+    if (!isActive) return;
+
     const nextHash = buildExplorerHash({
       viewMode,
       sortDirection,
@@ -129,7 +133,7 @@ export const useTechnologyExplorerState = ({
     if (globalThis.location.hash !== nextHash) {
       globalThis.history.replaceState(null, '', `${globalThis.location.pathname}${globalThis.location.search}${nextHash}`);
     }
-  }, [activeTechnology, selectedCompany, selectedEntryKey, sortDirection, viewMode]);
+  }, [activeTechnology, isActive, selectedCompany, selectedEntryKey, sortDirection, viewMode]);
 
   return {
     viewMode,
