@@ -3,7 +3,7 @@ import type { CVData, Skill } from './types';
 export const sampleData: CVData = {
   personalInfo: {
     name: 'Lukáš Kroček',
-    title: 'FrontEnd / HTML5 / React / BrightScript / Vibe Coding',
+    title: 'FrontEnd / HTML5 / React / BrightScript / AI Code Assist',
     phone: ['+420', ' ', '737', ' ', '576', ' ', '072'],
     email: ['lkrocek', '@', 'gmail', '.', 'com'],
     linkedin: ['linkedin', '.', 'com', '/', 'in', '/', 'lukaskrocek'],
@@ -31,7 +31,7 @@ export const sampleData: CVData = {
     {
       url: 'https://agecraft.netlify.app/',
       label: 'Project: AgeCraft',
-      description: 'A game created with Vibe Coding, utilizing React, Redux, and other modern libraries.',
+      description: 'A game created with AI Code Assist, utilizing React, Redux, and other modern libraries.',
     }
   ],
 };
@@ -129,7 +129,7 @@ const skillsCs: Skill[] = [
 export const sampleDataCs: CVData = {
   personalInfo: {
     name: 'Lukáš Kroček',
-    title: 'FrontEnd / HTML5 / React / BrightScript / Vibe Coding',
+    title: 'FrontEnd / HTML5 / React / BrightScript / AI Code Assist',
     phone: ['+420', ' ', '737', ' ', '576', ' ', '072'],
     email: ['lkrocek', '@', 'gmail', '.', 'com'],
     linkedin: ['linkedin', '.', 'com', '/', 'in', '/', 'lukaskrocek'],
@@ -157,7 +157,7 @@ export const sampleDataCs: CVData = {
     {
       url: 'https://agecraft.netlify.app/',
       label: 'Projekt: AgeCraft',
-      description: 'Hra vytvořená pomocí Vibe Coding s využitím Reactu, Reduxu a dalších moderních knihoven.',
+      description: 'Hra vytvořená pomocí AI Code Assist s využitím Reactu, Reduxu a dalších moderních knihoven.',
     }
   ],
 };
