@@ -29,8 +29,8 @@ export const Overview: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const entries = canvas.getAllByRole('button');
-    expect(entries.length).toBeGreaterThan(0);
-    await userEvent.click(entries[0]);
+    expect(entries.length).toBeGreaterThan(1);
+    await userEvent.click(entries[1]);
     expect(args.onSelectEntry).toHaveBeenCalledOnce();
   },
 };
@@ -43,8 +43,12 @@ export const Selected: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     const buttons = canvas.getAllByRole('button');
-    // First button is the back/header button that triggers onClearSelection when entry is selected
     await userEvent.click(buttons[0]);
     expect(args.onClearSelection).toHaveBeenCalledOnce();
   },
 };
+
+
+
+
+

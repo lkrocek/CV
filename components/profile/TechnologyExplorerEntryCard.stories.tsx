@@ -25,8 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const card = canvas.getByRole('button');
-    await userEvent.click(card);
+    await userEvent.click(canvas.getByRole('button'));
     expect(args.onClick).toHaveBeenCalledOnce();
   },
 };
@@ -44,3 +43,8 @@ export const Selected: Story = {
     expect(args.onClick).toHaveBeenCalledOnce();
   },
 };
+
+
+
+
+

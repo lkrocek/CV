@@ -39,9 +39,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const rows = canvas.getAllByRole('button');
-    expect(rows.length).toBeGreaterThan(0);
-    await userEvent.click(rows[0]);
+    const techRow = canvas.getByRole('button', { name: /javascript/i });
+    await userEvent.click(techRow);
     expect(args.onSelectTechnology).toHaveBeenCalled();
   },
 };
+
+
+
+
+

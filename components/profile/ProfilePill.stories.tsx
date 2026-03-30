@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { ProfilePill } from './ProfilePill';
 
 const meta = {
@@ -20,17 +21,30 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText('React')).toBeInTheDocument();
+  },
+};
 
 export const Accent: Story = {
   args: {
     tone: 'accent',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText('React')).toBeInTheDocument();
   },
 };
 
 export const LongLabel: Story = {
   args: {
     children: 'Performance optimization',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/performance optimization/i)).toBeInTheDocument();
   },
 };
 
@@ -43,4 +57,13 @@ export const TechnologyWithDuration: Story = {
       </span>
     ),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/typescript/i)).toBeInTheDocument();
+  },
 };
+
+
+
+
+

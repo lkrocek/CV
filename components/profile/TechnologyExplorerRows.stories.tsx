@@ -28,8 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const DurationBar: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const row = canvas.getByRole('button');
-    await userEvent.click(row);
+    await userEvent.click(canvas.getByRole('button'));
     expect(args.onSelect).toHaveBeenCalledOnce();
   },
 };
@@ -52,8 +51,7 @@ export const TimelineBar: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const row = canvas.getByRole('button');
-    await userEvent.click(row);
+    await userEvent.click(canvas.getByRole('button'));
     expect(timelineOnSelect).toHaveBeenCalledOnce();
   },
 };
@@ -76,8 +74,12 @@ export const CompanyBar: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const row = canvas.getByRole('button');
-    await userEvent.click(row);
+    await userEvent.click(canvas.getByRole('button'));
     expect(companyOnSelect).toHaveBeenCalledOnce();
   },
 };
+
+
+
+
+

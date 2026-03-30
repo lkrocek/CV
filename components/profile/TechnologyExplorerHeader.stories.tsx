@@ -40,9 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const buttons = canvas.getAllByRole('button');
-    // Click first view mode tab
-    await userEvent.click(buttons[0]);
+    await userEvent.click(canvas.getByRole('button', { name: /timeline/i }));
     expect(args.onViewModeChange).toHaveBeenCalled();
   },
 };
@@ -52,15 +50,16 @@ export const TimelineView: Story = {
     viewMode: 'timeline',
     sortDirection: 'asc',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByRole('button', { name: /ascending|descending|newest first|oldest first/i })).toBeInTheDocument();
+  },
 };
 
 export const SortToggle: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const buttons = canvas.getAllByRole('button');
-    // Sort button is the last button (after view mode tabs)
-    const sortBtn = buttons[buttons.length - 1];
-    await userEvent.click(sortBtn);
+    await userEvent.click(canvas.getByRole('button', { name: /ascending|descending|newest first|oldest first/i }));
     expect(args.onSortToggle).toHaveBeenCalledOnce();
   },
 };
@@ -69,10 +68,23 @@ export const FilterActive: Story = {
   args: {
     selectedGroups: new Set(['EcmaScript', 'SPA&PWA']),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByRole('button', { name: /2 groups/i })).toBeInTheDocument();
+  },
 };
 
 export const LightMode: Story = {
   args: {
     isDarkMode: false,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByRole('button', { name: /most used/i })).toBeInTheDocument();
+  },
 };
+
+
+
+
+
