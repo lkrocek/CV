@@ -5,7 +5,7 @@ import { TechnologyExplorerHeader } from './TechnologyExplorerHeader';
 const STORY_GROUPS = ['Languages', 'EcmaScript', 'SPA&PWA', 'CI&CD', 'Platforms', 'Tools'];
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerHeader',
+  title: 'CV/TechnologyExplorerHeader',
   component: TechnologyExplorerHeader,
   args: {
     isDarkMode: true,

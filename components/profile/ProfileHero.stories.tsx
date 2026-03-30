@@ -5,7 +5,7 @@ import { getStoryLayoutProps, storyData } from './storybookData';
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/ProfileHero',
+  title: 'CV/ProfileHero',
   component: ProfileHero,
   args: {
     data: storyData,

@@ -7,7 +7,7 @@ const timelineInsight = storyInsights.find((item) => item.name === 'React') ?? s
 const companyEntry = timelineInsight.entries[0];
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerRows',
+  title: 'CV/TechnologyExplorerRows',
   component: BarRow,
   args: {
     insight,

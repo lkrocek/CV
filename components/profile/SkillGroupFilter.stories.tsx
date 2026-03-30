@@ -5,7 +5,7 @@ import { SkillGroupFilter } from './SkillGroupFilter';
 const GROUPS = ['Languages', 'EcmaScript', 'SPA&PWA', 'Databases', 'CI&CD', 'Platforms', 'Tools'];
 
 const meta = {
-  title: 'CV/Profile/SkillGroupFilter',
+  title: 'CV/SkillGroupFilter',
   component: SkillGroupFilter,
   args: {
     groups: GROUPS,

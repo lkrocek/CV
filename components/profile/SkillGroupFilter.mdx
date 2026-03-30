@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './SkillGroupFilter.stories';
+
+<Meta of={Stories} />
+
+# SkillGroupFilter
+
+**Dropdown filter for narrowing the technology list by skill category.**
+
+Used inside TechnologyExplorerHeader to let the visitor focus on a specific area of expertise. It renders as a portal-based dropdown to avoid z-index conflicts with surrounding sections.
+
+## Responsibilities
+
+- Toggle individual skill groups on/off.
+- Support "all selected" as the neutral default state (empty Set = no filter).
+- Render the dropdown via a portal so it never clips against parent overflow.
+
+## What it is not
+
+Not a search input. Not responsible for applying the filter — it only surfaces state changes via `onGroupsChange`.
+
+<Canvas>
+  <Story of={Stories.AllSelected} />
+</Canvas>

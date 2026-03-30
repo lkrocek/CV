@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TechnologyExplorerCompanyPanel } from './TechnologyExplorerCompanyPanel';
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerCompanyPanel',
+  title: 'CV/TechnologyExplorerCompanyPanel',
   component: TechnologyExplorerCompanyPanel,
   args: {
     isDarkMode: true,

@@ -6,7 +6,7 @@ import { getStoryLayoutProps, storyData } from './storybookData';
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorer',
+  title: 'CV/TechnologyExplorer',
   component: TechnologyExplorer,
   args: {
     activeTechnology: props.insights[0]?.name ?? null,

@@ -6,7 +6,7 @@ const selectedInsight = storyInsights.find((item) => item.name === 'JavaScript')
 const selectedEntry = selectedInsight.entries[0] ?? null;
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerDetail',
+  title: 'CV/TechnologyExplorerDetail',
   component: TechnologyExplorerDetail,
   args: {
     selectedInsight,

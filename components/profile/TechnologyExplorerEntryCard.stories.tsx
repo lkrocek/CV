@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TechnologyExplorerEntryCard } from './TechnologyExplorerEntryCard';
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerEntryCard',
+  title: 'CV/TechnologyExplorerEntryCard',
   component: TechnologyExplorerEntryCard,
   args: {
     company: 'Inphinity',

@@ -5,7 +5,7 @@ import { getStoryLayoutProps } from './storybookData';
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/QuickOverview',
+  title: 'CV/QuickOverview',
   component: QuickOverview,
   args: {
     isDarkMode: true,

@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { ProfileTopBar } from './ProfileTopBar';
 
 const meta = {
-  title: 'CV/Profile/ProfileTopBar',
+  title: 'CV/ProfileTopBar',
   component: ProfileTopBar,
   args: {
     activeView: 'about',

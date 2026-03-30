@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorerRows.stories';
+
+<Meta of={Stories} />
+
+# TechnologyExplorerRows
+
+**Row primitives for the technology list: duration bar, timeline bar and company segment.**
+
+Three row variants share this file: `BarRow` (duration mode), `TimelineRow` (calendar timeline) and `CompanyRow` (per-company segment inside a timeline row). Each is a pure display component driven entirely by props.
+
+## Responsibilities
+
+- Render a proportional bar for a single technology entry.
+- Support both duration and timeline coordinate systems.
+- Communicate selected state visually.
+
+## What it is not
+
+Not responsible for computing proportions or managing selection — all values come from TechnologyExplorer.
+
+<Canvas>
+  <Story of={Stories.DurationBar} />
+</Canvas>

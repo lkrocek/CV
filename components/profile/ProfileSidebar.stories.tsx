@@ -5,7 +5,7 @@ import { getStoryLayoutProps, storyData } from './storybookData';
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/ProfileSidebar',
+  title: 'CV/ProfileSidebar',
   component: ProfileSidebar,
   args: {
     data: storyData,

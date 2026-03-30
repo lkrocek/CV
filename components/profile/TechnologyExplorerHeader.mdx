@@ -1,0 +1,25 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorerHeader.stories';
+
+<Meta of={Stories} />
+
+# TechnologyExplorerHeader
+
+**Toolbar for the technology list: title, view mode, sort and group filter.**
+
+Sits at the top of TechnologyExplorer and owns all list-level controls. Switching view mode toggles between duration bars and a timeline. The group filter delegates to SkillGroupFilter.
+
+## Responsibilities
+
+- Label the section and communicate the current state.
+- Toggle between duration and timeline view modes.
+- Toggle sort direction.
+- Open the skill group filter dropdown.
+
+## What it is not
+
+Not responsible for applying any of the controls — it delegates everything via callbacks.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>

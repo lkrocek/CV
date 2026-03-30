@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProfilePill } from './ProfilePill';
 
 const meta = {
-  title: 'CV/Profile/ProfilePill',
+  title: 'CV/ProfilePill',
   component: ProfilePill,
   args: {
     children: 'React',
