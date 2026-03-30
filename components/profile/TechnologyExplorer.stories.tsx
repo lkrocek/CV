@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import { TechnologyExplorer } from './TechnologyExplorer';
 import { getStoryLayoutProps, storyData } from './storybookData';
 
@@ -15,7 +16,7 @@ const meta = {
     isActive: true,
     language: 'en',
     skills: storyData.skills,
-    onSelectTechnology: () => {},
+    onSelectTechnology: fn(),
   },
   render: (args, context) => {
     const [activeTechnology, setActiveTechnology] = useState(args.activeTechnology);
@@ -25,7 +26,7 @@ const meta = {
         activeTechnology={activeTechnology}
         isDarkMode={context.globals.theme !== 'light'}
         language={context.globals.language}
-        onSelectTechnology={setActiveTechnology}
+        onSelectTechnology={(tech) => { setActiveTechnology(tech); args.onSelectTechnology(tech); }}
       />
     );
   },
@@ -36,4 +37,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const rows = canvas.getAllByRole('button');
+    expect(rows.length).toBeGreaterThan(0);
+    await userEvent.click(rows[0]);
+    expect(args.onSelectTechnology).toHaveBeenCalled();
+  },
 };

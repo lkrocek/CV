@@ -28,4 +28,33 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const downloadBtn = canvas.getByRole('button', { name: /download/i });
+    await userEvent.click(downloadBtn);
+    expect(args.onDownload).toHaveBeenCalledOnce();
+  },
+};
+
+export const ExperienceView: Story = {
+  args: {
+    activeView: 'experience',
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const langBtn = canvas.getByRole('button', { name: /toggle language/i });
+    await userEvent.click(langBtn);
+    expect(args.onLanguageToggle).toHaveBeenCalledOnce();
+  },
+};
+
+export const Downloading: Story = {
+  args: {
+    isDownloading: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const downloadBtn = canvas.getByRole('button', { name: /download/i });
+    expect(downloadBtn).toBeDisabled();
+  },
 };

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import { TechnologyExplorerEntryCard } from './TechnologyExplorerEntryCard';
 
 const meta = {
@@ -13,6 +14,7 @@ const meta = {
     projects: ['Qlik Extension Platform', 'Design System'],
     isDarkMode: true,
     language: 'en',
+    onClick: fn(),
   },
 } satisfies Meta<typeof TechnologyExplorerEntryCard>;
 
@@ -20,11 +22,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const card = canvas.getByRole('button');
+    await userEvent.click(card);
+    expect(args.onClick).toHaveBeenCalledOnce();
+  },
+};
 
 export const Selected: Story = {
   args: {
     selected: true,
     projects: [],
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const card = canvas.getByRole('button');
+    card.focus();
+    await userEvent.keyboard('{Enter}');
+    expect(args.onClick).toHaveBeenCalledOnce();
   },
 };
