@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import { TechnologyExplorer } from './TechnologyExplorer';
-import { getStoryLayoutProps } from './storybookData';
+import { getStoryLayoutProps, storyData } from './storybookData';
 
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorer',
+  title: 'CV/TechnologyExplorer',
   component: TechnologyExplorer,
   args: {
     activeTechnology: props.insights[0]?.name ?? null,
     insights: props.insights,
     isDarkMode: true,
+    isActive: true,
     language: 'en',
-    onSelectTechnology: () => {},
+    skills: storyData.skills,
+    onSelectTechnology: fn(),
   },
   render: (args, context) => {
     const [activeTechnology, setActiveTechnology] = useState(args.activeTechnology);
@@ -23,7 +26,7 @@ const meta = {
         activeTechnology={activeTechnology}
         isDarkMode={context.globals.theme !== 'light'}
         language={context.globals.language}
-        onSelectTechnology={setActiveTechnology}
+        onSelectTechnology={(tech) => { setActiveTechnology(tech); args.onSelectTechnology(tech); }}
       />
     );
   },
@@ -34,10 +37,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-};
-
-export const Czech: Story = {
-  args: {
-    language: 'cs',
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const techRow = canvas.getByRole('button', { name: /javascript/i });
+    await userEvent.click(techRow);
+    expect(args.onSelectTechnology).toHaveBeenCalled();
   },
 };
+
+
+
+
+

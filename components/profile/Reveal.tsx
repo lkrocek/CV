@@ -18,7 +18,8 @@ export const Reveal: React.FC<RevealProps> = ({
   const ref = React.useRef<Element | null>(null);
   const [isVisible, setIsVisible] = React.useState(false);
   const splashReadyRef = React.useRef(
-    typeof document !== 'undefined' && document.body.classList.contains('splash-done'),
+    typeof document !== 'undefined' &&
+    (document.body.classList.contains('splash-done') || !document.getElementById('splash')),
   );
   const pendingRef = React.useRef(false);
 

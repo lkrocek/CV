@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorerCompanyPanel.stories';
+
+<Meta of={Stories} />
+
+# TechnologyExplorerCompanyPanel
+
+**Summary panel showing a company's context for a selected technology.**
+
+Appears in the right column of TechnologyExplorer when the visitor selects a specific technology. It answers "how did this person use this technology at this company" with role, period and project list.
+
+## Responsibilities
+
+- Display company-level aggregates: total months, role count, technology count.
+- List roles with period and short summary.
+- Stay readable at panel width without truncating critical information.
+
+## What it is not
+
+Not a full company profile. Not responsible for selection state — it only renders what it receives.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>

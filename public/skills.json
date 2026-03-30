@@ -32,17 +32,19 @@
       { "name": "Express" },
       { "name": "Electron" },
       { "name": "Storybook" },
-      { "name": "Socket.io" }
+      { "name": "Socket.io" },
+      { "name": "Google Maps API" }
     ]
   },
   {
     "name": "SPA&PWA",
     "children": [
       { "name": "REST API" },
-      { "name": "Websockets" },
-      { "name": "PostMessages" },
+      { "name": "WebSockets" },
+      { "name": "PostMessage" },
+      { "name": "Canvas" },
       { "name": "WebRTC" },
-      { "name": "WebWorkers" },
+      { "name": "WebWorker" },
       { "name": "Manifest" },
       { "name": "LocalStorage" },
       { "name": "Tailwind CSS" }
@@ -75,12 +77,19 @@
   {
     "name": "Platforms",
     "children": [
+      { "name": "HTML-based" },
       { "name": "HbbTV" },
+      { "name": "LG Smart Tv" },
+      { "name": "ATSC 3.0" },
+      { "name": "Samsung SmartTv" },
       { "name": "Roku" },
-      { "name": "Networking" },
-      { "name": "Telnet" },
-      { "name": "Debian" },
-      { "name": "AI" }
+      { "name": "Freeview Play" },
+      { "name": "Android" },
+      { "name": "iOS" },
+      { "name": "Xfinity" },
+      { "name": "Fire TV" },
+      { "name": "Playstation 4/5" },
+      { "name": "Xbox One" }
     ]
   },
   {
@@ -89,7 +98,16 @@
       { "name": "Git" },
       { "name": "MS Windows" },
       { "name": "Linux" },
+      { "name": "Ubuntu" },
       { "name": "VirtualBox" },
+      { "name": "Networking" },
+      { "name": "AI Code Assist" },
+      { "name": "Telnet" },
+      { "name": "Debian" },
+      { "name": "CheatEngine" },
+      { "name": "WireShark" },
+      { "name": "RaspberryPi I/O" },
+      { "name": "Arduino" },
       { "name": "VSCode" },
       { "name": "WebStorm" },
       { "name": "MSOffice" }

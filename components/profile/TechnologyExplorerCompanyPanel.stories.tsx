@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { TechnologyExplorerCompanyPanel } from './TechnologyExplorerCompanyPanel';
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerCompanyPanel',
+  title: 'CV/TechnologyExplorerCompanyPanel',
   component: TechnologyExplorerCompanyPanel,
   args: {
     isDarkMode: true,
@@ -34,4 +35,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/selected highlights/i)).toBeInTheDocument();
+  },
+};
+
+
+
+
+

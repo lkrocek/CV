@@ -1,0 +1,25 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorerDetail.stories';
+
+<Meta of={Stories} />
+
+# TechnologyExplorerDetail
+
+**Right-panel drill-down showing evidence for a selected technology.**
+
+The detail panel is the payoff of the explorer interaction. Once a technology is selected, this component shows total exposure, matching roles and — on a second click — project-level context.
+
+## Responsibilities
+
+- Show aggregate stats for the selected technology.
+- List company entries ordered by recency.
+- Allow drilling into a specific entry to surface project details.
+- Animate the transition between overview and entry state.
+
+## What it is not
+
+Not responsible for fetching or computing insights — it receives them as props.
+
+<Canvas>
+  <Story of={Stories.Overview} />
+</Canvas>

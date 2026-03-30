@@ -3,6 +3,7 @@ import type { CVData, Company, Language, Project, Role, Skill } from '../../type
 type Copy = {
   about: string;
   experience: string;
+  experienceSection: string;
   skills: string;
   projects: string;
   download: string;
@@ -33,12 +34,18 @@ type Copy = {
   sortAscending: string;
   sortNewestFirst: string;
   sortOldestFirst: string;
+  filterAllGroups: string;
+  filterGroupsCount: string;
+  filterClearSelection: string;
+  filterInvertSelection: string;
+  filterSelectOnly: string;
 };
 
 export const profileCopy: Record<Language, Copy> = {
   en: {
     about: 'About',
     experience: 'Print version',
+    experienceSection: 'Experience',
     skills: 'Skills',
     projects: 'Projects',
     download: 'Download CV (PDF)',
@@ -69,10 +76,16 @@ export const profileCopy: Record<Language, Copy> = {
     sortAscending: 'Ascending',
     sortNewestFirst: 'Newest first',
     sortOldestFirst: 'Oldest first',
+    filterAllGroups: 'All groups',
+    filterGroupsCount: 'groups',
+    filterClearSelection: 'Clear selection',
+    filterInvertSelection: 'Invert selection',
+    filterSelectOnly: 'Select only this group',
   },
   cs: {
     about: 'O mně',
     experience: 'Tisková verze',
+    experienceSection: 'Zkušenosti',
     skills: 'Dovednosti',
     projects: 'Projekty',
     download: 'Stáhnout CV (PDF)',
@@ -88,7 +101,7 @@ export const profileCopy: Record<Language, Copy> = {
     technologiesTracked: 'Sledované technologie',
     totalCareerSpan: 'Délka praxe',
     present: 'Nyní',
-    tech: 'Tech',
+    tech: 'Technologie',
     work: 'Práce',
     impact: 'Dopad',
     showMore: 'Zobrazit více',
@@ -103,6 +116,11 @@ export const profileCopy: Record<Language, Copy> = {
     sortAscending: 'Vzestupně',
     sortNewestFirst: 'Od nejnovějších',
     sortOldestFirst: 'Od nejstarších',
+    filterAllGroups: 'Všechny skupiny',
+    filterGroupsCount: 'skupin',
+    filterClearSelection: 'Zrušit výběr',
+    filterInvertSelection: 'Obrátit výběr',
+    filterSelectOnly: 'Vybrat pouze tuto skupinu',
   },
 };
 
@@ -133,11 +151,11 @@ export const getProfileHighlights = (data: CVData): string[] => {
   return [...summarySentences, ...aboutLines].slice(0, 3);
 };
 
-export const getHeroPills = (_data: CVData, language: Language): string[] => (
-  language === 'cs'
-    ? ['15+ let', 'React architektura', 'Performance', 'Enterprise UI', 'TypeScript']
-    : ['15+ years', 'React architecture', 'Performance', 'Enterprise UI', 'TypeScript']
-);
+export const getHeroPills = (data: CVData, language: Language): string[] => {
+  const years = Math.round(getCareerSpanMonths(data) / 12);
+  const yearsLabel = language === 'cs' ? `~${years} let` : `~${years} years`;
+  return [yearsLabel, 'Entertainment UI', 'Enterprise UI', 'Performance', 'TypeScript'];
+};
 
 export const getFeaturedProjects = (data: CVData): string[] => {
   const projects = data.companies.flatMap((company) =>
@@ -198,7 +216,8 @@ export const formatPeriod = (projects: Project[], language: Language): string =>
     }
     return value;
   };
-  const end = to ? formatDate(to) : (language === 'cs' ? 'Nyní' : 'Now');
+  const present = language === 'cs' ? 'Nyní' : 'Now';
+  const end = to ? formatDate(to) : present;
   return `${formatDate(from)} – ${end}`;
 };
 
@@ -238,7 +257,7 @@ export type TechnologyInsight = {
   entries: TechnologyEntry[];
 };
 
-const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRegExp = (value: string): string => value.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 
 const toMonthIndex = (from: string, to: string | null): [number, number] => {
   const now = new Date();

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import type { Language } from '../../types';
+import type { Language, Skill } from '../../types';
 import { type TechnologyInsight } from './profileContent';
 import { TechnologyExplorerDetail } from './TechnologyExplorerDetail';
 import { TechnologyExplorerHeader } from './TechnologyExplorerHeader';
@@ -19,6 +19,7 @@ type TechnologyExplorerProps = {
   isDarkMode: boolean;
   isActive: boolean;
   language: Language;
+  skills: Skill[];
   onSelectTechnology: (technology: string) => void;
 };
 
@@ -28,6 +29,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
   isDarkMode,
   isActive,
   language,
+  skills,
   onSelectTechnology,
 }) => {
   const {
@@ -45,21 +47,45 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     onSelectTechnology,
   });
 
+  const [selectedGroups, setSelectedGroups] = React.useState<Set<string>>(new Set());
+
+  const skillGroups = useMemo(
+    () => skills.filter((s) => s.children?.length).map((s) => s.name),
+    [skills],
+  );
+
+  const techToGroup = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const group of skills) {
+      if (!group.children?.length) continue;
+      for (const tech of group.children) map.set(tech.name, group.name);
+    }
+    return map;
+  }, [skills]);
+
+  const filteredInsights = useMemo(() => {
+    if (selectedGroups.size === 0) return insights;
+    return insights.filter((insight) => {
+      const group = techToGroup.get(insight.name);
+      return group !== undefined && selectedGroups.has(group);
+    });
+  }, [insights, selectedGroups, techToGroup]);
+
   const sortedInsights = useMemo(() => {
-    const base = [...insights].sort((left, right) => right.totalMonths - left.totalMonths);
+    const base = [...filteredInsights].sort((left, right) => right.totalMonths - left.totalMonths);
     return sortDirection === 'asc' ? base.reverse() : base;
-  }, [insights, sortDirection]);
+  }, [filteredInsights, sortDirection]);
 
   const timelineData = useMemo(() => {
     if (viewMode !== 'timeline' && viewMode !== 'companies') return null;
 
-    const timelineSorted = [...insights].sort((left, right) => {
+    const timelineSorted = [...filteredInsights].sort((left, right) => {
       const leftFirst = Math.min(...left.entries.map((entry) => entry.fromMonthIdx));
       const rightFirst = Math.min(...right.entries.map((entry) => entry.fromMonthIdx));
       return sortDirection === 'asc' ? rightFirst - leftFirst : leftFirst - rightFirst;
     });
 
-    const allEntries = insights.flatMap((insight) => insight.entries);
+    const allEntries = filteredInsights.flatMap((insight) => insight.entries);
     const careerStart = Math.min(...allEntries.map((entry) => entry.fromMonthIdx));
     const careerEnd = Math.max(...allEntries.map((entry) => entry.toMonthIdx));
     const careerTotal = careerEnd - careerStart;
@@ -81,13 +107,13 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     }
 
     return { timelineSorted, careerStart, careerTotal, companyColors, companiesByFirst, yearTicks };
-  }, [insights, sortDirection, viewMode]);
+  }, [filteredInsights, sortDirection, viewMode]);
 
   const companiesData = useMemo(() => {
     if (viewMode !== 'companies' || !timelineData) return null;
 
     const map = new Map<string, { fromMonthIdx: number; toMonthIdx: number }>();
-    for (const insight of insights) {
+    for (const insight of filteredInsights) {
       for (const entry of insight.entries) {
         const existing = map.get(entry.company);
         if (!existing) {
@@ -117,12 +143,12 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
       companyColors: timelineData.companyColors,
       yearTicks: timelineData.yearTicks,
     };
-  }, [insights, sortDirection, timelineData, viewMode]);
+  }, [filteredInsights, sortDirection, timelineData, viewMode]);
 
   const companyDetails = useMemo(() => {
     const roleMap = new Map<string, CompanyDetailRole>();
 
-    for (const insight of insights) {
+    for (const insight of filteredInsights) {
       for (const entry of insight.entries) {
         const key = [entry.company, entry.role, entry.period, entry.summary].join('\x00');
         const existing = roleMap.get(key);
@@ -178,7 +204,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     }
 
     return [...companyMap.values()].sort((left, right) => right.totalMonths - left.totalMonths);
-  }, [insights]);
+  }, [filteredInsights]);
 
   const selectedCompanyDetail = useMemo(() => {
     if (!companyDetails.length) return null;
@@ -193,7 +219,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
 
   const selectedInsight = useMemo(() => {
     if (activeTechnology) {
-      return insights.find((insight) => insight.name === activeTechnology) ?? null;
+      return filteredInsights.find((insight) => insight.name === activeTechnology) ?? null;
     }
 
     if (viewMode === 'timeline' && timelineData?.timelineSorted.length) {
@@ -204,8 +230,8 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
       return sortedInsights[0];
     }
 
-    return insights[0] ?? null;
-  }, [activeTechnology, insights, sortedInsights, timelineData, viewMode]);
+    return filteredInsights[0] ?? null;
+  }, [activeTechnology, filteredInsights, sortedInsights, timelineData, viewMode]);
 
   const chartColumnRef = React.useRef<HTMLDivElement>(null);
   const [chartHeight, setChartHeight] = React.useState<number | undefined>(undefined);
@@ -220,7 +246,7 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
     return () => ro.disconnect();
   }, []);
 
-  const maxMonths = insights.reduce((max, insight) => Math.max(max, insight.totalMonths), 1);
+  const maxMonths = filteredInsights.reduce((max, insight) => Math.max(max, insight.totalMonths), 1);
   const selectedEntry = selectedInsight?.entries.find((entry, index) => `${selectedInsight.name}-${entry.company}-${index}` === selectedEntryKey) ?? null;
 
   React.useEffect(() => {
@@ -245,8 +271,11 @@ export const TechnologyExplorer: React.FC<TechnologyExplorerProps> = ({
             language={language}
             sortDirection={sortDirection}
             viewMode={viewMode}
+            skillGroups={skillGroups}
+            selectedGroups={selectedGroups}
             onSortToggle={() => setSortDirection((current) => current === 'desc' ? 'asc' : 'desc')}
             onViewModeChange={setViewMode}
+            onGroupsChange={setSelectedGroups}
           />
 
           <TechnologyExplorerChart

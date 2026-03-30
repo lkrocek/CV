@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn, expect, userEvent, within } from 'storybook/test';
 import { BarRow, CompanyRow, TimelineRow } from './TechnologyExplorerRows';
 import { storyInsights } from './storybookData';
 
@@ -7,7 +8,7 @@ const timelineInsight = storyInsights.find((item) => item.name === 'React') ?? s
 const companyEntry = timelineInsight.entries[0];
 
 const meta = {
-  title: 'CV/Profile/TechnologyExplorerRows',
+  title: 'CV/TechnologyExplorerRows',
   component: BarRow,
   args: {
     insight,
@@ -15,7 +16,7 @@ const meta = {
     isSelected: true,
     isDarkMode: true,
     language: 'en',
-    onSelect: () => undefined,
+    onSelect: fn(),
   },
   render: (args) => <BarRow {...args} />,
 } satisfies Meta<typeof BarRow>;
@@ -24,7 +25,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const DurationBar: Story = {};
+export const DurationBar: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
+    expect(args.onSelect).toHaveBeenCalledOnce();
+  },
+};
+
+const timelineOnSelect = fn();
 
 export const TimelineBar: Story = {
   render: () => (
@@ -37,10 +46,17 @@ export const TimelineBar: Story = {
       isSelected={false}
       isDarkMode={true}
       language="en"
-      onSelect={() => undefined}
+      onSelect={timelineOnSelect}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
+    expect(timelineOnSelect).toHaveBeenCalledOnce();
+  },
 };
+
+const companyOnSelect = fn();
 
 export const CompanyBar: Story = {
   render: () => (
@@ -53,8 +69,17 @@ export const CompanyBar: Story = {
       color="#818cf8"
       yearPcts={[0, 25, 50, 75, 100]}
       isDarkMode={true}
+      onSelect={companyOnSelect}
     />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
+    expect(companyOnSelect).toHaveBeenCalledOnce();
+  },
 };
 
-export const InteractionSmoke: Story = {};
+
+
+
+

@@ -2,7 +2,7 @@
 
 A personal CV built as a single-page React application — fully interactive, bilingual, and exportable to PDF.
 
-**Live:** [lkrocek.github.io/CV](https://lkrocek.github.io/CV) &nbsp;·&nbsp; **Storybook:** [lkrocek.github.io/CV/storybook](https://lkrocek.github.io/CV/storybook)
+**Live:** [krocek.cz](https://krocek.cz) &nbsp;·&nbsp; **Storybook:** [krocek.cz/storybook](https://krocek.cz/storybook)
 
 ---
 

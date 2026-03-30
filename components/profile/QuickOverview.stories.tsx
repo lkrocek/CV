@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { QuickOverview } from './QuickOverview';
 import { getStoryLayoutProps } from './storybookData';
 
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/QuickOverview',
+  title: 'CV/QuickOverview',
   component: QuickOverview,
   args: {
     isDarkMode: true,
@@ -23,7 +24,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/Career span/i)).toBeInTheDocument();
+  },
+};
 
 export const ShortMetrics: Story = {
   args: {
@@ -33,4 +39,13 @@ export const ShortMetrics: Story = {
       { label: 'Projects', value: '18' },
     ],
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText('15y')).toBeInTheDocument();
+  },
 };
+
+
+
+
+

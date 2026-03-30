@@ -4,13 +4,20 @@
 @import '@fontsource/manrope/800.css';
 @import '@fontsource/space-grotesk/500.css';
 @import '@fontsource/space-grotesk/700.css';
-@import '@fontsource/playfair-display/700.css';
-@import '@fontsource/playfair-display/700-italic.css';
+
+@font-face {
+  font-family: 'Oxanium';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/oxanium-700.woff2') format('woff2');
+}
 
 @import 'tailwindcss';
 
 @theme {
-  --font-name: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-name: 'Oxanium', 'Space Grotesk', sans-serif;
+  --font-display: 'Oxanium', 'Space Grotesk', sans-serif;
 }
 
 @keyframes tab-blink-glow {

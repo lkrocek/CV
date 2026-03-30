@@ -1,9 +1,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { CVPreview } from './components/CVPreview';
 import { useCvData } from './hooks/useCvData';
 import { useTechnologyInsights } from './hooks/useTechnologyInsights';
 import type { Language } from './types';
+
+// Start fetching the UI bundle immediately (during splash), render lazily
+const cvPreviewImport = import('./components/CVPreview');
+const CVPreview = React.lazy(() => cvPreviewImport.then((m) => ({ default: m.CVPreview })));
 
 const SPLASH_MIN_MS = 1800;
 
@@ -114,18 +117,20 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen">
       <main className="min-h-screen w-full">
-        <CVPreview
-          data={currentCvData}
-          insights={insights}
-          isDarkMode={isDarkMode}
-          isDownloadingPdf={isDownloadingPdf}
-          language={language}
-          onDownloadPdf={handleDownloadPdf}
-          onLanguageChange={setLanguage}
-          onThemeToggle={() => setIsDarkMode((prev) => !prev)}
-          onChange={updateSectionField}
-          onProjectChange={updateProjectField}
-        />
+        <React.Suspense fallback={null}>
+          <CVPreview
+            data={currentCvData}
+            insights={insights}
+            isDarkMode={isDarkMode}
+            isDownloadingPdf={isDownloadingPdf}
+            language={language}
+            onDownloadPdf={handleDownloadPdf}
+            onLanguageChange={setLanguage}
+            onThemeToggle={() => setIsDarkMode((prev) => !prev)}
+            onChange={updateSectionField}
+            onProjectChange={updateProjectField}
+          />
+        </React.Suspense>
       </main>
     </div>
   );

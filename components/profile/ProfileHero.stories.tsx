@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
 import { ProfileHero } from './ProfileHero';
 import { getStoryLayoutProps, storyData } from './storybookData';
 
 const props = getStoryLayoutProps('en');
 
 const meta = {
-  title: 'CV/Profile/ProfileHero',
+  title: 'CV/ProfileHero',
   component: ProfileHero,
   args: {
     data: storyData,
@@ -26,6 +27,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/15\+ years/i)).toBeInTheDocument();
+  },
 };
 
 export const DenseHighlights: Story = {
@@ -38,4 +43,13 @@ export const DenseHighlights: Story = {
     ],
     pills: ['React', 'TypeScript', 'Storybook', 'WebRTC', 'Performance'],
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/React architecture/i)).toBeInTheDocument();
+  },
 };
+
+
+
+
+

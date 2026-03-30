@@ -2,14 +2,18 @@ import React from 'react';
 import type { Language } from '../../types';
 import { profileCopy } from './profileContent';
 import type { SortDirection, ViewMode } from './technologyExplorerState';
+import { SkillGroupFilter } from './SkillGroupFilter';
 
 type TechnologyExplorerHeaderProps = {
   isDarkMode: boolean;
   language: Language;
   sortDirection: SortDirection;
   viewMode: ViewMode;
+  skillGroups: string[];
+  selectedGroups: Set<string>;
   onSortToggle: () => void;
   onViewModeChange: (viewMode: ViewMode) => void;
+  onGroupsChange: (groups: Set<string>) => void;
 };
 
 export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> = ({
@@ -17,8 +21,11 @@ export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> =
   language,
   sortDirection,
   viewMode,
+  skillGroups,
+  selectedGroups,
   onSortToggle,
   onViewModeChange,
+  onGroupsChange,
 }) => {
   const copy = profileCopy[language];
   const [isBlinking, setIsBlinking] = React.useState(false);
@@ -37,6 +44,7 @@ export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> =
     globalThis.addEventListener('splashDismissed', startBlink, { once: true });
     return () => globalThis.removeEventListener('splashDismissed', startBlink);
   }, []);
+
   const isChronologicalView = viewMode === 'timeline' || viewMode === 'companies';
   const sortLabel = isChronologicalView
     ? (sortDirection === 'desc' ? copy.sortNewestFirst : copy.sortOldestFirst)
@@ -78,27 +86,37 @@ export const TechnologyExplorerHeader: React.FC<TechnologyExplorerHeaderProps> =
           ))}
         </div>
 
-        <button
-          onClick={onSortToggle}
-          className={`inline-flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2 text-sm font-medium transition-colors ${
-            isDarkMode
-              ? 'border-[rgba(255,255,255,0.08)] bg-white/[0.03] text-slate-300 hover:bg-white/[0.06]'
-              : 'border-[rgba(148,163,184,0.24)] bg-white/80 text-slate-600 hover:bg-white'
-          }`}
-        >
-          <span
-            className={`inline-flex h-4 w-4 items-center justify-center transition-transform ${
-              sortDirection === 'desc' ? 'rotate-180' : ''
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onSortToggle}
+            className={`inline-flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2 text-sm font-medium transition-colors ${
+              isDarkMode
+                ? 'border-[rgba(255,255,255,0.08)] bg-white/[0.03] text-slate-300 hover:bg-white/[0.06]'
+                : 'border-[rgba(148,163,184,0.24)] bg-white/80 text-slate-600 hover:bg-white'
             }`}
-            aria-hidden="true"
           >
-            <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4">
-              <path d="M8 3.5V12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M4.75 6.75L8 3.5L11.25 6.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-          {sortLabel}
-        </button>
+            <span
+              className={`inline-flex h-4 w-4 items-center justify-center transition-transform ${
+                sortDirection === 'desc' ? 'rotate-180' : ''
+              }`}
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4">
+                <path d="M8 3.5V12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M4.75 6.75L8 3.5L11.25 6.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            {sortLabel}
+          </button>
+
+          <SkillGroupFilter
+            groups={skillGroups}
+            selectedGroups={selectedGroups}
+            onGroupsChange={onGroupsChange}
+            isDarkMode={isDarkMode}
+            language={language}
+          />
+        </div>
       </div>
     </div>
   );

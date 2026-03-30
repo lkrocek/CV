@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as Stories from './TechnologyExplorerEntryCard.stories';
+
+<Meta of={Stories} />
+
+# TechnologyExplorerEntryCard
+
+**Compact card representing one company/role entry inside the detail panel.**
+
+Renders a single experience entry: company, role, period, duration and a short summary with project names. Used as the list item inside TechnologyExplorerDetail.
+
+## Responsibilities
+
+- Communicate the role context at a glance.
+- Highlight selected state visually.
+- Keep the layout stable across variable summary lengths.
+
+## What it is not
+
+Not a standalone component — it is tightly coupled to TechnologyExplorerDetail's list layout.
+
+<Canvas>
+  <Story of={Stories.Default} />
+</Canvas>

@@ -13,6 +13,7 @@ import type { CVData, Language, Project } from '../../types';
 import { flattenSkills, formatPeriod, profileCopy } from '../profile/profileContent';
 import manropeRegular from '@fontsource/manrope/files/manrope-latin-ext-400-normal.woff';
 import manropeBold from '@fontsource/manrope/files/manrope-latin-ext-700-normal.woff';
+import { buildPdfFileName } from './pdfHelpers';
 
 type CvPdfDocumentProps = {
   data: CVData;
@@ -26,6 +27,8 @@ Font.register({
     { src: manropeBold, fontWeight: 700 },
   ],
 });
+
+Font.registerHyphenationCallback((word) => [word]);
 
 const styles = StyleSheet.create({
   page: {
@@ -90,19 +93,19 @@ const styles = StyleSheet.create({
   },
   summaryBlock: {
     marginTop: 1,
-    paddingLeft: 92,
-    maxWidth: 470,
   },
   summaryLead: {
     color: '#1e293b',
     fontSize: 11,
     lineHeight: 1.26,
     marginBottom: 2,
+    textAlign: 'justify',
   },
   summary: {
     color: '#334155',
     fontSize: 11,
     lineHeight: 1.28,
+    textAlign: 'justify',
   },
   contact: {
     width: 170,
@@ -165,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 10,
-    marginBottom: 2,
+    marginBottom: 5,
   },
   roleTitle: {
     fontSize: 11,
@@ -177,7 +180,13 @@ const styles = StyleSheet.create({
   },
   bodyText: {
     color: '#334155',
-    lineHeight: 1.28,
+    lineHeight: 0.8,
+  },
+  roleDescription: {
+    color: '#334155',
+    lineHeight: 0.8,
+    marginTop: 4,
+    marginBottom: 4,
   },
   projectsList: {
     marginTop: 4,
@@ -212,19 +221,6 @@ const styles = StyleSheet.create({
 });
 
 const joinField = (value: string[]) => value.join('');
-
-const sanitizeFilePart = (value: string) =>
-  value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-export const buildPdfFileName = (data: CVData, language: Language) => {
-  const base = sanitizeFilePart(data.personalInfo.name || 'cv');
-  return `${base || 'cv'}-${language}.pdf`;
-};
 
 const resolvePhotoSource = (photo: string) => {
   if (!photo) return null;
@@ -297,7 +293,7 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
         <View style={styles.grid}>
           <View style={styles.mainColumn}>
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{copy.experience}</Text>
+              <Text style={styles.sectionTitle}>{copy.experienceSection}</Text>
               {data.companies.map((company, companyIndex) => (
                 <View key={`${company.name}-${companyIndex}`} style={styles.companyBlock}>
                   <Text style={styles.companyName}>{company.name}</Text>
@@ -307,7 +303,7 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
                         <Text style={styles.roleTitle}>{role.title}</Text>
                         <Text style={styles.period}>{formatPeriod(role.projects ?? [], language)}</Text>
                       </View>
-                      <Text style={styles.bodyText}>{role.description}</Text>
+                      <Text style={styles.roleDescription}>{role.description}</Text>
                       <View style={styles.projectsList}>{renderProjectSummary(role.projects)}</View>
                     </View>
                   ))}
