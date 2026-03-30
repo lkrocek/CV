@@ -1,17 +1,22 @@
 import React from 'react';
 import type { CVData, Language } from '../types';
-import { ProfileExperienceSection } from './profile/ProfileExperienceSection';
 import { ProfileHero } from './profile/ProfileHero';
 import { ProfileSidebar } from './profile/ProfileSidebar';
 import { ProfileTopBar } from './profile/ProfileTopBar';
 import { Reveal } from './profile/Reveal';
-import { TechnologyExplorer } from './profile/TechnologyExplorer';
 import {
   flattenSkills,
   getHeroPills,
   getProfileHighlights,
 } from './profile/profileContent';
 import type { TechnologyInsight } from './profile/profileContent';
+
+const TechnologyExplorer = React.lazy(() =>
+  import('./profile/TechnologyExplorer').then((m) => ({ default: m.TechnologyExplorer }))
+);
+const ProfileExperienceSection = React.lazy(() =>
+  import('./profile/ProfileExperienceSection').then((m) => ({ default: m.ProfileExperienceSection }))
+);
 
 interface CVPreviewProps {
   data: CVData;
@@ -75,15 +80,17 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
 
           <div className={activeView !== 'about' ? 'hidden' : 'contents'}>
             <Reveal delayMs={40}>
-              <TechnologyExplorer
-                activeTechnology={activeTechnology}
-                insights={insights}
-                isDarkMode={isDarkMode}
-                isActive={activeView === 'about'}
-                language={language}
-                skills={data.skills}
-                onSelectTechnology={setActiveTechnology}
-              />
+              <React.Suspense fallback={null}>
+                <TechnologyExplorer
+                  activeTechnology={activeTechnology}
+                  insights={insights}
+                  isDarkMode={isDarkMode}
+                  isActive={activeView === 'about'}
+                  language={language}
+                  skills={data.skills}
+                  onSelectTechnology={setActiveTechnology}
+                />
+              </React.Suspense>
             </Reveal>
             <ProfileSidebar
               data={data}
@@ -95,12 +102,14 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
 
           {activeView === 'experience' && (
             <Reveal>
-              <ProfileExperienceSection
-                companies={data.companies}
-                isDarkMode={isDarkMode}
-                language={language}
-                skillPills={printSkills}
-              />
+              <React.Suspense fallback={null}>
+                <ProfileExperienceSection
+                  companies={data.companies}
+                  isDarkMode={isDarkMode}
+                  language={language}
+                  skillPills={printSkills}
+                />
+              </React.Suspense>
             </Reveal>
           )}
         </main>
