@@ -13,7 +13,7 @@ import {
 
 export const storyData: CVData = {
   personalInfo: {
-    name: 'Lukas Krocek',
+    name: 'Lukáš Kroček',
     title: 'Senior Frontend / React Developer',
     phone: ['+420', ' ', '737', ' ', '576', ' ', '072'],
     email: ['lkrocek', '@', 'gmail', '.', 'com'],
