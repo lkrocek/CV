@@ -56,9 +56,3 @@ export const LightMode: Story = {
     isDarkMode: false,
   },
 };
-
-export const Czech: Story = {
-  args: {
-    language: 'cs',
-  },
-};

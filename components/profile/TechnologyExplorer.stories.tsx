@@ -37,9 +37,3 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 };
-
-export const Czech: Story = {
-  args: {
-    language: 'cs',
-  },
-};

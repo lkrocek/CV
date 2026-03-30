@@ -101,7 +101,7 @@ export const profileCopy: Record<Language, Copy> = {
     technologiesTracked: 'Sledované technologie',
     totalCareerSpan: 'Délka praxe',
     present: 'Nyní',
-    tech: 'Tech',
+    tech: 'Technologie',
     work: 'Práce',
     impact: 'Dopad',
     showMore: 'Zobrazit více',

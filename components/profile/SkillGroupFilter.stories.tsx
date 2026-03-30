@@ -58,10 +58,3 @@ export const LightMode: Story = {
     selectedGroups: new Set(['Platforms']),
   },
 };
-
-export const Czech: Story = {
-  args: {
-    language: 'cs',
-    selectedGroups: new Set(['EcmaScript', 'Languages']),
-  },
-};
