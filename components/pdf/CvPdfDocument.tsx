@@ -13,6 +13,7 @@ import type { CVData, Language, Project } from '../../types';
 import { flattenSkills, formatPeriod, profileCopy } from '../profile/profileContent';
 import manropeRegular from '@fontsource/manrope/files/manrope-latin-ext-400-normal.woff';
 import manropeBold from '@fontsource/manrope/files/manrope-latin-ext-700-normal.woff';
+import { buildPdfFileName } from './pdfHelpers';
 
 type CvPdfDocumentProps = {
   data: CVData;
@@ -220,19 +221,6 @@ const styles = StyleSheet.create({
 });
 
 const joinField = (value: string[]) => value.join('');
-
-const sanitizeFilePart = (value: string) =>
-  value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-export const buildPdfFileName = (data: CVData, language: Language) => {
-  const base = sanitizeFilePart(data.personalInfo.name || 'cv');
-  return `${base || 'cv'}-${language}.pdf`;
-};
 
 const resolvePhotoSource = (photo: string) => {
   if (!photo) return null;
