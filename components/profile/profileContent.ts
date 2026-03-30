@@ -216,7 +216,8 @@ export const formatPeriod = (projects: Project[], language: Language): string =>
     }
     return value;
   };
-  const end = to ? formatDate(to) : (language === 'cs' ? 'Nyní' : 'Now');
+  const present = language === 'cs' ? 'Nyní' : 'Now';
+  const end = to ? formatDate(to) : present;
   return `${formatDate(from)} – ${end}`;
 };
 
@@ -256,7 +257,7 @@ export type TechnologyInsight = {
   entries: TechnologyEntry[];
 };
 
-const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeRegExp = (value: string): string => value.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
 
 const toMonthIndex = (from: string, to: string | null): [number, number] => {
   const now = new Date();
