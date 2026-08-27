@@ -96,6 +96,7 @@ const skillsCs: Skill[] = [
       { "name": "Webpack" },
       { "name": "Gulp" },
       { "name": "Grunt" },
+      { "name": "Selenide" },
       { "name": "Apache" },
       { "name": "Nginx" },
       { "name": "Varnish" },

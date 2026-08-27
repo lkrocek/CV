@@ -66,6 +66,7 @@
       { "name": "Grunt" },
       { "name": "Jest" },
       { "name": "Mocha" },
+      { "name": "Selenide" },
       { "name": "Apache" },
       { "name": "Nginx" },
       { "name": "Varnish" },
