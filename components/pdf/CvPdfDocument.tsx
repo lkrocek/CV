@@ -28,6 +28,12 @@ Font.register({
   ],
 });
 
+Font.register({
+  family: 'Oxanium PDF',
+  src: '/fonts/oxanium-latin-ext-700.ttf',
+  fontWeight: 700,
+});
+
 Font.registerHyphenationCallback((word) => [word]);
 
 const styles = StyleSheet.create({
@@ -81,12 +87,14 @@ const styles = StyleSheet.create({
     paddingTop: 4,
   },
   name: {
+    fontFamily: 'Oxanium PDF',
     fontSize: 24,
     fontWeight: 700,
     marginBottom: 2,
     lineHeight: 1.02,
   },
   role: {
+    fontFamily: 'Oxanium PDF',
     fontSize: 13,
     color: '#334155',
     lineHeight: 1.08,
@@ -123,6 +131,13 @@ const styles = StyleSheet.create({
     color: '#1d4ed8',
     textDecoration: 'none',
     fontSize: 10,
+  },
+  linkSecondary: {
+    color: '#0f172a',
+    textDecoration: 'none',
+    fontSize: 11,
+    fontWeight: 700,
+    marginTop: 3,
   },
   grid: {
     flexDirection: 'row',
@@ -255,12 +270,24 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
   const skills = flattenSkills(data.skills).slice(0, 30);
   const photoSource = resolvePhotoSource(data.personalInfo.profilePhoto);
   const summary = splitSummary(data.summary);
+  const pdfTitle = `${data.personalInfo.name} CV`;
+  const pdfKeywords = [
+    data.personalInfo.name,
+    data.personalInfo.title,
+    'Curriculum Vitae',
+    'CV',
+    'Oxanium',
+    'Manrope',
+  ];
 
   return (
     <Document
-      title={`${data.personalInfo.name} CV`}
+      title={pdfTitle}
       author={data.personalInfo.name}
       subject="Curriculum Vitae"
+      creator="AI Enhanced CV Builder"
+      producer="AI Enhanced CV Builder"
+      keywords={pdfKeywords}
       language={language}
     >
       <Page size="A4" style={styles.page}>
@@ -280,6 +307,9 @@ export const CvPdfDocument: React.FC<CvPdfDocumentProps> = ({ data, language }) 
               <Text style={styles.contactLine}>{data.personalInfo.address}</Text>
               <Link src={`https://${joinField(data.personalInfo.linkedin)}`} style={styles.link}>
                 {joinField(data.personalInfo.linkedin)}
+              </Link>
+              <Link src="https://krocek.cz" style={styles.linkSecondary}>
+                krocek.cz
               </Link>
             </View>
           </View>
