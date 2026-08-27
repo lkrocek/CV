@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "node scripts/download-oxanium.mjs",
     "build": "vite build",
+    "prebuild": "node scripts/download-oxanium.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

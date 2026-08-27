@@ -10,7 +10,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/oxanium-700.woff2') format('woff2');
+  src: url('/fonts/oxanium-latin-ext-700.ttf') format('truetype');
 }
 
 @import 'tailwindcss';
