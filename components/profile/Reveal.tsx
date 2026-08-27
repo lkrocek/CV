@@ -6,6 +6,25 @@ type RevealProps = {
   delayMs?: number;
   y?: number;
   as?: 'div' | 'section' | 'li';
+  showScrollHint?: boolean;
+  revealOnMount?: boolean;
+};
+
+export const getRevealState = (visibleViewportRatio: number) => ({
+  isVisible: visibleViewportRatio >= 0.1,
+  showScrollHint: visibleViewportRatio < 0.1,
+});
+
+const getVisibleViewportRatio = (element: Element): number => {
+  const rootRect = document.getElementById('app-scroll')?.getBoundingClientRect();
+  const targetRect = element.getBoundingClientRect();
+  const viewportTop = rootRect?.top ?? 0;
+  const viewportBottom = rootRect?.bottom ?? globalThis.innerHeight;
+  const viewportHeight = viewportBottom - viewportTop;
+  if (targetRect.bottom <= viewportTop) return 0;
+  return viewportHeight > 0
+    ? Math.max(0, (viewportBottom - targetRect.top) / viewportHeight)
+    : 0;
 };
 
 export const Reveal: React.FC<RevealProps> = ({
@@ -14,9 +33,12 @@ export const Reveal: React.FC<RevealProps> = ({
   delayMs = 0,
   y = 28,
   as = 'div',
+  showScrollHint = false,
+  revealOnMount = false,
 }) => {
   const ref = React.useRef<Element | null>(null);
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(revealOnMount);
+  const [isPartiallyVisible, setIsPartiallyVisible] = React.useState(false);
   const splashReadyRef = React.useRef(
     typeof document !== 'undefined' &&
     (document.body.classList.contains('splash-done') || !document.getElementById('splash')),
@@ -32,7 +54,11 @@ export const Reveal: React.FC<RevealProps> = ({
 
     const handler = () => {
       splashReadyRef.current = true;
-      if (pendingRef.current) {
+      const revealState = ref.current
+        ? getRevealState(getVisibleViewportRatio(ref.current))
+        : null;
+      if (revealState?.showScrollHint) setIsPartiallyVisible(true);
+      if (revealState?.isVisible || pendingRef.current) {
         setIsVisible(true);
       }
     };
@@ -44,21 +70,39 @@ export const Reveal: React.FC<RevealProps> = ({
     const element = ref.current;
     if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        observer.disconnect();
-        if (splashReadyRef.current) {
-          setIsVisible(true);
-        } else {
-          pendingRef.current = true;
+    const evaluateVisibility = () => {
+        const visibleViewportRatio = getVisibleViewportRatio(element);
+        const revealState = getRevealState(visibleViewportRatio);
+        setIsPartiallyVisible(revealState.showScrollHint);
+        if (revealState.isVisible) {
+          if (splashReadyRef.current) {
+            setIsVisible(true);
+          } else {
+            pendingRef.current = true;
+          }
         }
-      },
-      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
+    };
+    const observer = new IntersectionObserver(
+      () => evaluateVisibility(),
+      { threshold: [0, 0.1], root: document.getElementById('app-scroll') },
     );
+    const resizeObserver = new ResizeObserver(evaluateVisibility);
+    const scrollContainer = document.getElementById('app-scroll');
 
     observer.observe(element);
-    return () => observer.disconnect();
+    resizeObserver.observe(element);
+    scrollContainer?.addEventListener('scroll', evaluateVisibility, { passive: true });
+    globalThis.addEventListener('resize', evaluateVisibility);
+    const frame = requestAnimationFrame(() => {
+      evaluateVisibility();
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      resizeObserver.disconnect();
+      scrollContainer?.removeEventListener('scroll', evaluateVisibility);
+      globalThis.removeEventListener('resize', evaluateVisibility);
+    };
   }, []);
 
   const style: React.CSSProperties = {
@@ -72,13 +116,25 @@ export const Reveal: React.FC<RevealProps> = ({
     willChange: 'opacity, transform, filter',
   };
 
-  if (as === 'li') {
-    return <li ref={setRef} className={className} style={style}>{children}</li>;
-  }
+  const content = as === 'li'
+    ? <li ref={setRef} className={className} style={style}>{children}</li>
+    : as === 'section'
+      ? <section ref={setRef} className={className} style={style}>{children}</section>
+      : <div ref={setRef} className={className} style={style}>{children}</div>;
 
-  if (as === 'section') {
-    return <section ref={setRef} className={className} style={style}>{children}</section>;
-  }
+  if (!showScrollHint || !isPartiallyVisible || isVisible) return content;
 
-  return <div ref={setRef} className={className} style={style}>{children}</div>;
+  return (
+    <>
+      {content}
+      <button
+        type="button"
+        className="reveal-scroll-hint"
+        aria-label="Scroll to reveal content"
+        onClick={() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+      >
+        ↓
+      </button>
+    </>
+  );
 };
