@@ -79,7 +79,7 @@ export const CVPreview: React.FC<CVPreviewProps> = ({ data, insights, isDarkMode
           <ProfileHero data={data} highlights={highlights} isDarkMode={isDarkMode} pills={heroPills} />
 
           <div className={activeView !== 'about' ? 'hidden' : 'contents'}>
-            <Reveal delayMs={40}>
+            <Reveal delayMs={40} showScrollHint>
               <React.Suspense fallback={null}>
                 <TechnologyExplorer
                   activeTechnology={activeTechnology}

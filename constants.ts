@@ -15,7 +15,7 @@ export const sampleData: CVData = {
   educations: [],
   skills: [],
   aboutMe: [
-    "I am a family man with two children, a wife, and a dog. I thrive on learning new skills and embrace challenges head-on.",
+    "I am a family man with two children and a wife. I thrive on learning new skills and embrace challenges head-on.",
     "In my free time, I build and experiment with IoT modules for projects like drones and gesture-controlled LED strips, using platforms like Arduino, Raspberry Pi, and others for scripting in JavaScript or Lua.",
     "I also enjoy developing addons for games like World of Warcraft and mods for Minecraft.",
     "Driven by the satisfaction of achieving what hasn't been done before, but pragmatic enough to pivot when facing a dead end and find alternative solutions.",
@@ -96,6 +96,7 @@ const skillsCs: Skill[] = [
       { "name": "Webpack" },
       { "name": "Gulp" },
       { "name": "Grunt" },
+      { "name": "Selenide" },
       { "name": "Apache" },
       { "name": "Nginx" },
       { "name": "Varnish" },
@@ -141,7 +142,7 @@ export const sampleDataCs: CVData = {
   educations: [],
   skills: skillsCs,
   aboutMe: [
-    "Mám dvě děti, ženu a psa. Rád se učím novým zkušenostem a žádná výzva pro mě není problém.",
+    "Mám dvě děti a ženu. Rád se učím novým zkušenostem a žádná výzva pro mě není problém.",
     "Ve volném čase si hraji a učím se s IoT moduly pro tvorbu dronů či LED pásků ovládaných gesty, s využitím platforem jako Arduino, Raspberry Pi a dalších pro skriptování v JavaScriptu či Lua.",
     "Zabývám se také tvorbou addonů pro hry jako je World of Warcraft a módů pro Minecraft.",
     "Největší uspokojení mi přináší úspěch z řešení, která se zdají být nemožná, ale dokážu i uznat, kdy je čas hledat novou cestu.",

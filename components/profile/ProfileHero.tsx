@@ -30,7 +30,7 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ data, highlights, isDa
         </div>
       </Reveal>
       <div>
-        <Reveal delayMs={110} y={20}>
+        <Reveal delayMs={110} y={20} revealOnMount>
           <h1 className={`font-name text-5xl font-bold tracking-tight sm:text-6xl ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
             {(() => {
               const spaceIdx = data.personalInfo.name.indexOf(' ');
@@ -44,12 +44,12 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ data, highlights, isDa
             })()}
           </h1>
         </Reveal>
-        <Reveal delayMs={180} y={20}>
+        <Reveal delayMs={180} y={20} revealOnMount>
           <p className={`mt-4 text-2xl sm:text-3xl ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>{data.personalInfo.title}</p>
         </Reveal>
         <ul className={`mt-8 space-y-4 text-lg leading-8 ${isDarkMode ? 'text-slate-300' : 'text-slate-700'}`}>
           {highlights.map((item, index) => (
-            <Reveal key={item} as="li" className="flex gap-4" delayMs={240 + index * 90} y={16}>
+            <Reveal key={item} as="li" className="flex gap-4" delayMs={240 + index * 90} y={16} revealOnMount>
               <span className="mt-3 h-2 w-2 shrink-0 rounded-full bg-[#38bdf8]" />
               <span>{item}</span>
             </Reveal>
@@ -57,7 +57,7 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({ data, highlights, isDa
         </ul>
         <div className="mt-8 flex flex-wrap gap-3">
           {pills.map((pill, index) => (
-            <Reveal key={pill} delayMs={420 + index * 55} y={12}>
+            <Reveal key={pill} delayMs={420 + index * 55} y={12} revealOnMount>
               <ProfilePill tone={index === 0 ? 'accent' : 'default'} isDarkMode={isDarkMode}>
                 {pill}
               </ProfilePill>
